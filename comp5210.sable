@@ -52,7 +52,7 @@ Tokens
 	opencurl = '{';
 	closecurl='}';
 	quote = '"';
-	id =  letter+(letter | '_' letter)+'_'?;
+	id =  letter (letter|digit | '_' (letter|digit))*;
 
 IgnoredTokens
 	whitespace, 
