@@ -78,20 +78,15 @@ Productions
 		{last_method} method;	
 		
 	method = 
-		function [method_name]: id openparenth formal_parameters closedparenth opencurl statements closecurl semicolon;
+		{with_param}function [method_name]: id openparenth formal_parameters closedparenth opencurl statements closecurl semicolon|
+		{without_param}function [method_name]: id openparenth closedparenth opencurl statements closecurl semicolon;
 		
 	method_call = 
 		[method_name]: id openparenth actual_parameters closedparenth semicolon;
 		
  	actual_parameters = 
 		{string_param} actual_parameters comma string  |
-		{int_parameters}actual_parameters comma intlit   | 
-		{float_parameters}actual_parameters comma floatlit  |
-		{var_parameters} actual_parameters comma id|
-		{string} string| 
-		{variable} id | 
-		{int} intlit|
-		{float} floatlit|
+		{expression_param} actual_parameters comma expressions   |
 		{nothing};
 		
 	formal_parameters = 
@@ -108,12 +103,12 @@ Productions
 		{num_declare} num_declare |
 		{method_call} method_call | 
 		{if} if | 
-		{while} while;
+		{while} while|
+		{var_declare} [var_type]: id [var_name]: id semicolon|
+		{array_declare} [var_type]: id [var_name]:id  [start_ob]:openbracket  [start_cb]:closedbracket equal [end_ob]:openbracket actual_parameters [end_cb]:closedbracket semicolon|;
 		
 	assignment = 
-		{assign_int} [int_name]: id equal expressions semicolon|
-		{var_declare} [var_type]: id [var_name]: id semicolon|
-		{array_assign_math_index} [var_name]:id  [start_ob]:openbracket  [start_cb]:closedbracket equal [end_ob]:openbracket actual_parameters [end_cb]:closedbracket semicolon|
+		{assign_expression} [int_name]: id equal expressions semicolon|
 		{array_assign} [var_name]:id  [start_ob]:openbracket [internal_math]: expressions [start_cb]:closedbracket equal [external_math]:expressions semicolon;
 		
 	num_declare = 
@@ -125,11 +120,11 @@ Productions
 	
 	// ----------If/Else/While--------------
 	if = 
-		iflit expressions opencurl statements  closecurl semicolon elsepart;	
+		{if_else} iflit expressions opencurl statements  closecurl semicolon elsepart|
+		{if} iflit expressions opencurl statements  closecurl semicolon;	
 	
 	elsepart = 
-		{else} else opencurl statements closecurl semicolon|
-		{no_else} ;
+		{else} else opencurl statements closecurl semicolon;
 		
 	while = 
 		whilelit  expressions  opencurl statements closecurl semicolon;
