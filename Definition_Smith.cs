@@ -14,9 +14,11 @@ namespace parser
     }
     public class BasicType : TypeDefinition
     {
+        public TypeDefinition assignment;
     }
     public class Array : TypeDefinition
     {
+        public TypeDefinition assignment;
     }
     public class VariableDefinition : Definition
     {
@@ -27,5 +29,6 @@ namespace parser
     }
     public class Procedure : SubprogramDefinition
     {
+	public SubprogramDefinition statements;
     }
 }
