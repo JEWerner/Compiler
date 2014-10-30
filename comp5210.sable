@@ -1,0 +1,168 @@
+Package comp5210;
+
+Helpers
+    digit = ['0' .. '9'] ;
+    ascii_char = [32 .. 127] ;
+	ascii_noqt= 32|33|[35..127];
+    letter = [['a' .. 'z'] + ['A' .. 'Z']] ;
+	eol = 10|13;																
+
+Tokens
+
+// these are only samples. They need to be fixed and edited to my language 
+
+//	bang = '!';
+//	cool = 'cool' digit+;
+//	class = 'class';
+	public = 'public';
+	private = 'private';
+//	id = letter+;
+//	return = 'return';
+
+	
+	comma = ',';
+	function = 'func'; 
+	semicolon=';';
+	constant_lit = 'constant';
+	whitespace = (' '|9|10|13)+;
+	comment = '//' ascii_char*;
+	and = 'AND' | '&&';
+	lessthan = '<';
+	plus ='+';
+	sub = '-';
+	multi = '*';
+	div ='/';
+	or = 'OR' | '||';
+	not = 'NOT';
+	eqto = '==';
+	grtreqto = '>=';
+	lesseqto = '<=';
+	grtr ='>';
+	iflit = 'if ';
+	else = 'else'; 				
+	whilelit = 'while';				
+	equal = '=';
+	string = '"'(ascii_noqt|'\"')*'"';
+	floatlit = digit+ '.'(digit* 'e' '-'? digit+ | digit+);
+	intlit = digit+;
+	openbracket='[';
+	closedbracket = ']';
+	openparenth = '(';
+	closedparenth = ')';
+	opencurl = '{';
+	closecurl='}';
+	quote = '"';
+	id =  letter+(letter | '_' letter)+'_'?;
+
+IgnoredTokens
+	whitespace, 
+	comment;
+	
+Productions
+
+	//----------Big Picture---------
+	program = constants methods;
+
+	//----------Constants----------
+	constants = 
+		{many} constants const_declare | 
+		{nothing} ;
+		
+	const_declare = 
+		{intdecl} constant_lit [var_type]:id [var_name]:id equal intlit semicolon | 
+		{floatdecl} constant_lit [var_type]:id [var_name]:id equal floatlit semicolon;
+
+	//-------- Methods------------
+	methods = 
+		{many_methods} methods method | 
+		{last_method} method;	
+		
+	method = 
+		function [method_name]: id openparenth formal_parameters closedparenth opencurl statements closecurl semicolon;
+		
+	method_call = 
+		[method_name]: id openparenth actual_parameters closedparenth semicolon;
+		
+ 	actual_parameters = 
+		{string_param} actual_parameters comma string  |
+		{int_parameters}actual_parameters comma intlit   | 
+		{float_parameters}actual_parameters comma floatlit  |
+		{var_parameters} actual_parameters comma id|
+		{string} string| 
+		{variable} id | 
+		{int} intlit|
+		{float} floatlit|
+		{nothing};
+		
+	formal_parameters = 
+		{many_parameters} [var_type]: id [var_name]: id comma formal_parameters| 
+		{final_parameter} [var_type]: id [var_name]: id;
+
+	// ----------- Statements-----------
+	statements = 
+		{many_statements} statements statement |
+		{one_statement} statement;
+		
+	statement = 
+		{assignment} assignment|
+		{num_declare} num_declare |
+		{method_call} method_call | 
+		{if} if | 
+		{while} while;
+		
+	assignment = 
+		{assign_int} [int_name]: id equal expressions semicolon|
+		{var_declare} [var_type]: id [var_name]: id semicolon|
+		{array_assign_math_index} [var_name]:id  [start_ob]:openbracket  [start_cb]:closedbracket equal [end_ob]:openbracket actual_parameters [end_cb]:closedbracket semicolon|
+		{array_assign} [var_name]:id  [start_ob]:openbracket [internal_math]: expressions [start_cb]:closedbracket equal [external_math]:expressions semicolon;
+		
+	num_declare = 
+		{intdecl} [var_type]:id [var_name]:id equal intlit semicolon |
+		{floatdecl} [var_type]:id [var_name]:id equal floatlit semicolon |
+		{array_index} [var_type]:id [var_name]:id  openbracket intlit closedbracket semicolon;
+	
+
+	
+	// ----------If/Else/While--------------
+	if = 
+		iflit expressions opencurl statements  closecurl semicolon elsepart;	
+	
+	elsepart = 
+		{else} else opencurl statements closecurl semicolon|
+		{no_else} ;
+		
+	while = 
+		whilelit  expressions  opencurl statements closecurl semicolon;
+
+
+	//----------Mathy Things------------
+	expressions = 
+		{and} expressions and logical_compare|
+		{or}expressions or logical_compare|
+		{not} expressions not logical_compare|
+		{no_log_op} logical_compare;
+	
+	logical_compare = 
+		{greater} [side1]:add_sub grtr [side2]:add_sub | 
+		{less_than} [side1]:add_sub lessthan  [side2]: add_sub | 
+		{greater_than_equal_to}[side1]: add_sub grtreqto [side2]: add_sub|
+		{less_than_equal_to} [side1]: add_sub lesseqto [side2]: add_sub|
+		{equal_to} [side1]: add_sub eqto  [side2]:add_sub| 
+		{no_log_compare} add_sub;
+	
+	add_sub = 
+		{add} add_sub plus multi_div |
+		{subtract} add_sub sub multi_div|
+		{no_more_add_sub} multi_div;
+	
+	multi_div = 
+		{multiply} multi_div multi parenth|
+		{divide}multi_div div parenth|
+		{no_more_div_multi} parenth;
+	
+	parenth = 
+		{parenth} openparenth expressions closedparenth |
+		{int} intlit|
+		{float} floatlit|
+		{array} id openbracket expressions closedbracket|
+		{variable} id;
