@@ -15,6 +15,16 @@ namespace parser
         // add int and float
         public override void InAProgram(comp5210.node.AProgram node)
         {
+            BasicType inttype = new BasicType();
+            inttype.name = "int";
+            BasicType flttype = new BasicType();
+            flttype.name = "float";
+            BasicType stringtype = new BasicType();
+            stringtype.name = "string";
+
+            stringhash.Add(stringtype.name, stringtype);
+            stringhash.Add(inttype.name, inttype);
+            stringhash.Add(flttype.name, flttype);
         }
 		
         public override void OutAManyConstants(comp5210.node.AManyConstants node)

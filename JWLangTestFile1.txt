@@ -1,0 +1,73 @@
+
+// TEST FILE FOR JWLANG
+// AUTHOR: Jake Werner
+
+
+
+//a ton of random comments
+// more randomness
+// comments
+
+
+
+
+	constant int CLASSWIDE = 10;
+	constant float BIGCLASSWIDE = 15;
+	
+	func randomFunction(string iHaveToBeHere){
+		
+		
+		output("This is a \"string\"");
+		int tempVar;
+		tempVar = 2 + 3 * 3 + 2; // should equal 13 not 25
+		output("tempVar");
+	};
+
+	func output(string words) {
+		int someArray[10];
+		print(string);
+	};
+
+
+	func main(int number){
+
+		int index = 4;
+		index = index + 2;
+		index = index * 3;
+		index = index / 1 ;
+		
+		//random comment
+
+		float new_Number;
+
+		if index == 6 {
+			new_Number = 1;
+		
+		};
+		else {
+			new_Number = 0;
+
+		};
+
+		while index <= 10 OR new_Number == 1 {
+			index = index + 1;
+			new_Number = new_Number + 1;
+		};
+		if new_Number >= 0 {
+		
+			
+			num = num + 1;
+		};
+		
+		while index >= 5  {
+			index = index - 1;
+
+		};
+		if new_Number < 0 && 4 == 3 {
+			help(4.5);
+		
+		} ;
+		
+		randomFunction("test");
+		
+	};

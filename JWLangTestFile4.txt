@@ -1,0 +1,13 @@
+
+func main(int num){
+int test = 31;
+internalFunction(test);
+};
+
+func second(string words){
+int index = 9;
+
+one = zero + one;
+one = 4 + 5;
+
+};

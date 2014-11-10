@@ -1,0 +1,5 @@
+
+func second(int num, int help){
+int index = 9;
+innerFunc("test", "help", var, 7.8);
+};
