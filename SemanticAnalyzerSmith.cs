@@ -21,7 +21,10 @@ namespace parser
             flttype.name = "float";
             BasicType stringtype = new BasicType();
             stringtype.name = "string";
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
 
+            stringhash.Add(booltype.name, booltype);
             stringhash.Add(stringtype.name, stringtype);
             stringhash.Add(inttype.name, inttype);
             stringhash.Add(flttype.name, flttype);
