@@ -22,17 +22,13 @@ public interface Analysis : Switch
     void CaseAFloatdeclConstDeclare(AFloatdeclConstDeclare node);
     void CaseAManyMethodsMethods(AManyMethodsMethods node);
     void CaseALastMethodMethods(ALastMethodMethods node);
-    void CaseAMethod(AMethod node);
+    void CaseAWithParamMethod(AWithParamMethod node);
+    void CaseAWithoutParamMethod(AWithoutParamMethod node);
     void CaseAMethodCall(AMethodCall node);
     void CaseAStringParamActualParameters(AStringParamActualParameters node);
-    void CaseAIntParametersActualParameters(AIntParametersActualParameters node);
-    void CaseAFloatParametersActualParameters(AFloatParametersActualParameters node);
-    void CaseAVarParametersActualParameters(AVarParametersActualParameters node);
-    void CaseAStringActualParameters(AStringActualParameters node);
-    void CaseAVariableActualParameters(AVariableActualParameters node);
-    void CaseAIntActualParameters(AIntActualParameters node);
-    void CaseAFloatActualParameters(AFloatActualParameters node);
-    void CaseANothingActualParameters(ANothingActualParameters node);
+    void CaseAExpressionParamActualParameters(AExpressionParamActualParameters node);
+    void CaseALastParamStringActualParameters(ALastParamStringActualParameters node);
+    void CaseALastParamExpressionActualParameters(ALastParamExpressionActualParameters node);
     void CaseAManyParametersFormalParameters(AManyParametersFormalParameters node);
     void CaseAFinalParameterFormalParameters(AFinalParameterFormalParameters node);
     void CaseAManyStatementsStatements(AManyStatementsStatements node);
@@ -42,20 +38,18 @@ public interface Analysis : Switch
     void CaseAMethodCallStatement(AMethodCallStatement node);
     void CaseAIfStatement(AIfStatement node);
     void CaseAWhileStatement(AWhileStatement node);
-    void CaseAAssignIntAssignment(AAssignIntAssignment node);
-    void CaseAVarDeclareAssignment(AVarDeclareAssignment node);
-    void CaseAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node);
+    void CaseAVarDeclareStatement(AVarDeclareStatement node);
+    void CaseAAssignExpressionAssignment(AAssignExpressionAssignment node);
     void CaseAArrayAssignAssignment(AArrayAssignAssignment node);
     void CaseAIntdeclNumDeclare(AIntdeclNumDeclare node);
     void CaseAFloatdeclNumDeclare(AFloatdeclNumDeclare node);
     void CaseAArrayIndexNumDeclare(AArrayIndexNumDeclare node);
-    void CaseAIf(AIf node);
+    void CaseAIfElseIf(AIfElseIf node);
+    void CaseAIfIf(AIfIf node);
     void CaseAElseElsepart(AElseElsepart node);
-    void CaseANoElseElsepart(ANoElseElsepart node);
     void CaseAWhile(AWhile node);
     void CaseAAndExpressions(AAndExpressions node);
     void CaseAOrExpressions(AOrExpressions node);
-    void CaseANotExpressions(ANotExpressions node);
     void CaseANoLogOpExpressions(ANoLogOpExpressions node);
     void CaseAGreaterLogicalCompare(AGreaterLogicalCompare node);
     void CaseALessThanLogicalCompare(ALessThanLogicalCompare node);
@@ -204,7 +198,11 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAMethod(AMethod node)
+    public virtual void CaseAWithParamMethod(AWithParamMethod node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseAWithoutParamMethod(AWithoutParamMethod node)
     {
         DefaultCase(node);
     }
@@ -216,35 +214,15 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAIntParametersActualParameters(AIntParametersActualParameters node)
+    public virtual void CaseAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
         DefaultCase(node);
     }
-    public virtual void CaseAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public virtual void CaseALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
         DefaultCase(node);
     }
-    public virtual void CaseAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseAStringActualParameters(AStringActualParameters node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseAVariableActualParameters(AVariableActualParameters node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseAIntActualParameters(AIntActualParameters node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseAFloatActualParameters(AFloatActualParameters node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseANothingActualParameters(ANothingActualParameters node)
+    public virtual void CaseALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
         DefaultCase(node);
     }
@@ -284,15 +262,11 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAAssignIntAssignment(AAssignIntAssignment node)
+    public virtual void CaseAVarDeclareStatement(AVarDeclareStatement node)
     {
         DefaultCase(node);
     }
-    public virtual void CaseAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
+    public virtual void CaseAAssignExpressionAssignment(AAssignExpressionAssignment node)
     {
         DefaultCase(node);
     }
@@ -312,15 +286,15 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAIf(AIf node)
+    public virtual void CaseAIfElseIf(AIfElseIf node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseAIfIf(AIfIf node)
     {
         DefaultCase(node);
     }
     public virtual void CaseAElseElsepart(AElseElsepart node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseANoElseElsepart(ANoElseElsepart node)
     {
         DefaultCase(node);
     }
@@ -333,10 +307,6 @@ public class AnalysisAdapter : Analysis
         DefaultCase(node);
     }
     public virtual void CaseAOrExpressions(AOrExpressions node)
-    {
-        DefaultCase(node);
-    }
-    public virtual void CaseANotExpressions(ANotExpressions node)
     {
         DefaultCase(node);
     }
@@ -774,19 +744,19 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutALastMethodMethods(node);
     }
-    public virtual void InAMethod(AMethod node)
+    public virtual void InAWithParamMethod(AWithParamMethod node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAMethod(AMethod node)
+    public virtual void OutAWithParamMethod(AWithParamMethod node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAMethod(AMethod node)
+    public override void CaseAWithParamMethod(AWithParamMethod node)
     {
-        InAMethod(node);
+        InAWithParamMethod(node);
         if(node.GetFunction() != null)
         {
             node.GetFunction().Apply(this);
@@ -823,7 +793,54 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetSemicolon().Apply(this);
         }
-        OutAMethod(node);
+        OutAWithParamMethod(node);
+    }
+    public virtual void InAWithoutParamMethod(AWithoutParamMethod node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAWithoutParamMethod(AWithoutParamMethod node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAWithoutParamMethod(AWithoutParamMethod node)
+    {
+        InAWithoutParamMethod(node);
+        if(node.GetFunction() != null)
+        {
+            node.GetFunction().Apply(this);
+        }
+        if(node.GetMethodName() != null)
+        {
+            node.GetMethodName().Apply(this);
+        }
+        if(node.GetOpenparenth() != null)
+        {
+            node.GetOpenparenth().Apply(this);
+        }
+        if(node.GetClosedparenth() != null)
+        {
+            node.GetClosedparenth().Apply(this);
+        }
+        if(node.GetOpencurl() != null)
+        {
+            node.GetOpencurl().Apply(this);
+        }
+        if(node.GetStatements() != null)
+        {
+            node.GetStatements().Apply(this);
+        }
+        if(node.GetClosecurl() != null)
+        {
+            node.GetClosecurl().Apply(this);
+        }
+        if(node.GetSemicolon() != null)
+        {
+            node.GetSemicolon().Apply(this);
+        }
+        OutAWithoutParamMethod(node);
     }
     public virtual void InAMethodCall(AMethodCall node)
     {
@@ -887,19 +904,19 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutAStringParamActualParameters(node);
     }
-    public virtual void InAIntParametersActualParameters(AIntParametersActualParameters node)
+    public virtual void InAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAIntParametersActualParameters(AIntParametersActualParameters node)
+    public virtual void OutAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAIntParametersActualParameters(AIntParametersActualParameters node)
+    public override void CaseAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
-        InAIntParametersActualParameters(node);
+        InAExpressionParamActualParameters(node);
         if(node.GetActualParameters() != null)
         {
             node.GetActualParameters().Apply(this);
@@ -908,156 +925,49 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetComma().Apply(this);
         }
-        if(node.GetIntlit() != null)
+        if(node.GetExpressions() != null)
         {
-            node.GetIntlit().Apply(this);
+            node.GetExpressions().Apply(this);
         }
-        OutAIntParametersActualParameters(node);
+        OutAExpressionParamActualParameters(node);
     }
-    public virtual void InAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public virtual void InALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public virtual void OutALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public override void CaseALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
-        InAFloatParametersActualParameters(node);
-        if(node.GetActualParameters() != null)
-        {
-            node.GetActualParameters().Apply(this);
-        }
-        if(node.GetComma() != null)
-        {
-            node.GetComma().Apply(this);
-        }
-        if(node.GetFloatlit() != null)
-        {
-            node.GetFloatlit().Apply(this);
-        }
-        OutAFloatParametersActualParameters(node);
-    }
-    public virtual void InAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        InAVarParametersActualParameters(node);
-        if(node.GetActualParameters() != null)
-        {
-            node.GetActualParameters().Apply(this);
-        }
-        if(node.GetComma() != null)
-        {
-            node.GetComma().Apply(this);
-        }
-        if(node.GetId() != null)
-        {
-            node.GetId().Apply(this);
-        }
-        OutAVarParametersActualParameters(node);
-    }
-    public virtual void InAStringActualParameters(AStringActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAStringActualParameters(AStringActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAStringActualParameters(AStringActualParameters node)
-    {
-        InAStringActualParameters(node);
+        InALastParamStringActualParameters(node);
         if(node.GetString() != null)
         {
             node.GetString().Apply(this);
         }
-        OutAStringActualParameters(node);
+        OutALastParamStringActualParameters(node);
     }
-    public virtual void InAVariableActualParameters(AVariableActualParameters node)
+    public virtual void InALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAVariableActualParameters(AVariableActualParameters node)
+    public virtual void OutALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAVariableActualParameters(AVariableActualParameters node)
+    public override void CaseALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
-        InAVariableActualParameters(node);
-        if(node.GetId() != null)
+        InALastParamExpressionActualParameters(node);
+        if(node.GetExpressions() != null)
         {
-            node.GetId().Apply(this);
+            node.GetExpressions().Apply(this);
         }
-        OutAVariableActualParameters(node);
-    }
-    public virtual void InAIntActualParameters(AIntActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAIntActualParameters(AIntActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAIntActualParameters(AIntActualParameters node)
-    {
-        InAIntActualParameters(node);
-        if(node.GetIntlit() != null)
-        {
-            node.GetIntlit().Apply(this);
-        }
-        OutAIntActualParameters(node);
-    }
-    public virtual void InAFloatActualParameters(AFloatActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAFloatActualParameters(AFloatActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAFloatActualParameters(AFloatActualParameters node)
-    {
-        InAFloatActualParameters(node);
-        if(node.GetFloatlit() != null)
-        {
-            node.GetFloatlit().Apply(this);
-        }
-        OutAFloatActualParameters(node);
-    }
-    public virtual void InANothingActualParameters(ANothingActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutANothingActualParameters(ANothingActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseANothingActualParameters(ANothingActualParameters node)
-    {
-        InANothingActualParameters(node);
-        OutANothingActualParameters(node);
+        OutALastParamExpressionActualParameters(node);
     }
     public virtual void InAManyParametersFormalParameters(AManyParametersFormalParameters node)
     {
@@ -1250,19 +1160,46 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutAWhileStatement(node);
     }
-    public virtual void InAAssignIntAssignment(AAssignIntAssignment node)
+    public virtual void InAVarDeclareStatement(AVarDeclareStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAAssignIntAssignment(AAssignIntAssignment node)
+    public virtual void OutAVarDeclareStatement(AVarDeclareStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAAssignIntAssignment(AAssignIntAssignment node)
+    public override void CaseAVarDeclareStatement(AVarDeclareStatement node)
     {
-        InAAssignIntAssignment(node);
+        InAVarDeclareStatement(node);
+        if(node.GetVarType() != null)
+        {
+            node.GetVarType().Apply(this);
+        }
+        if(node.GetVarName() != null)
+        {
+            node.GetVarName().Apply(this);
+        }
+        if(node.GetSemicolon() != null)
+        {
+            node.GetSemicolon().Apply(this);
+        }
+        OutAVarDeclareStatement(node);
+    }
+    public virtual void InAAssignExpressionAssignment(AAssignExpressionAssignment node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAAssignExpressionAssignment(AAssignExpressionAssignment node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAAssignExpressionAssignment(AAssignExpressionAssignment node)
+    {
+        InAAssignExpressionAssignment(node);
         if(node.GetIntName() != null)
         {
             node.GetIntName().Apply(this);
@@ -1279,81 +1216,7 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetSemicolon().Apply(this);
         }
-        OutAAssignIntAssignment(node);
-    }
-    public virtual void InAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        InAVarDeclareAssignment(node);
-        if(node.GetVarType() != null)
-        {
-            node.GetVarType().Apply(this);
-        }
-        if(node.GetVarName() != null)
-        {
-            node.GetVarName().Apply(this);
-        }
-        if(node.GetSemicolon() != null)
-        {
-            node.GetSemicolon().Apply(this);
-        }
-        OutAVarDeclareAssignment(node);
-    }
-    public virtual void InAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
-    {
-        InAArrayAssignMathIndexAssignment(node);
-        if(node.GetVarName() != null)
-        {
-            node.GetVarName().Apply(this);
-        }
-        if(node.GetStartOb() != null)
-        {
-            node.GetStartOb().Apply(this);
-        }
-        if(node.GetStartCb() != null)
-        {
-            node.GetStartCb().Apply(this);
-        }
-        if(node.GetEqual() != null)
-        {
-            node.GetEqual().Apply(this);
-        }
-        if(node.GetEndOb() != null)
-        {
-            node.GetEndOb().Apply(this);
-        }
-        if(node.GetActualParameters() != null)
-        {
-            node.GetActualParameters().Apply(this);
-        }
-        if(node.GetEndCb() != null)
-        {
-            node.GetEndCb().Apply(this);
-        }
-        if(node.GetSemicolon() != null)
-        {
-            node.GetSemicolon().Apply(this);
-        }
-        OutAArrayAssignMathIndexAssignment(node);
+        OutAAssignExpressionAssignment(node);
     }
     public virtual void InAArrayAssignAssignment(AArrayAssignAssignment node)
     {
@@ -1507,19 +1370,19 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutAArrayIndexNumDeclare(node);
     }
-    public virtual void InAIf(AIf node)
+    public virtual void InAIfElseIf(AIfElseIf node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAIf(AIf node)
+    public virtual void OutAIfElseIf(AIfElseIf node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAIf(AIf node)
+    public override void CaseAIfElseIf(AIfElseIf node)
     {
-        InAIf(node);
+        InAIfElseIf(node);
         if(node.GetIflit() != null)
         {
             node.GetIflit().Apply(this);
@@ -1548,7 +1411,46 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetElsepart().Apply(this);
         }
-        OutAIf(node);
+        OutAIfElseIf(node);
+    }
+    public virtual void InAIfIf(AIfIf node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAIfIf(AIfIf node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAIfIf(AIfIf node)
+    {
+        InAIfIf(node);
+        if(node.GetIflit() != null)
+        {
+            node.GetIflit().Apply(this);
+        }
+        if(node.GetExpressions() != null)
+        {
+            node.GetExpressions().Apply(this);
+        }
+        if(node.GetOpencurl() != null)
+        {
+            node.GetOpencurl().Apply(this);
+        }
+        if(node.GetStatements() != null)
+        {
+            node.GetStatements().Apply(this);
+        }
+        if(node.GetClosecurl() != null)
+        {
+            node.GetClosecurl().Apply(this);
+        }
+        if(node.GetSemicolon() != null)
+        {
+            node.GetSemicolon().Apply(this);
+        }
+        OutAIfIf(node);
     }
     public virtual void InAElseElsepart(AElseElsepart node)
     {
@@ -1584,21 +1486,6 @@ public class DepthFirstAdapter : AnalysisAdapter
             node.GetSemicolon().Apply(this);
         }
         OutAElseElsepart(node);
-    }
-    public virtual void InANoElseElsepart(ANoElseElsepart node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutANoElseElsepart(ANoElseElsepart node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseANoElseElsepart(ANoElseElsepart node)
-    {
-        InANoElseElsepart(node);
-        OutANoElseElsepart(node);
     }
     public virtual void InAWhile(AWhile node)
     {
@@ -1692,33 +1579,6 @@ public class DepthFirstAdapter : AnalysisAdapter
             node.GetLogicalCompare().Apply(this);
         }
         OutAOrExpressions(node);
-    }
-    public virtual void InANotExpressions(ANotExpressions node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutANotExpressions(ANotExpressions node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseANotExpressions(ANotExpressions node)
-    {
-        InANotExpressions(node);
-        if(node.GetExpressions() != null)
-        {
-            node.GetExpressions().Apply(this);
-        }
-        if(node.GetNot() != null)
-        {
-            node.GetNot().Apply(this);
-        }
-        if(node.GetLogicalCompare() != null)
-        {
-            node.GetLogicalCompare().Apply(this);
-        }
-        OutANotExpressions(node);
     }
     public virtual void InANoLogOpExpressions(ANoLogOpExpressions node)
     {
@@ -2366,19 +2226,19 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutALastMethodMethods(node);
     }
-    public virtual void InAMethod(AMethod node)
+    public virtual void InAWithParamMethod(AWithParamMethod node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAMethod(AMethod node)
+    public virtual void OutAWithParamMethod(AWithParamMethod node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAMethod(AMethod node)
+    public override void CaseAWithParamMethod(AWithParamMethod node)
     {
-        InAMethod(node);
+        InAWithParamMethod(node);
         if(node.GetSemicolon() != null)
         {
             node.GetSemicolon().Apply(this);
@@ -2415,7 +2275,54 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetFunction().Apply(this);
         }
-        OutAMethod(node);
+        OutAWithParamMethod(node);
+    }
+    public virtual void InAWithoutParamMethod(AWithoutParamMethod node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAWithoutParamMethod(AWithoutParamMethod node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAWithoutParamMethod(AWithoutParamMethod node)
+    {
+        InAWithoutParamMethod(node);
+        if(node.GetSemicolon() != null)
+        {
+            node.GetSemicolon().Apply(this);
+        }
+        if(node.GetClosecurl() != null)
+        {
+            node.GetClosecurl().Apply(this);
+        }
+        if(node.GetStatements() != null)
+        {
+            node.GetStatements().Apply(this);
+        }
+        if(node.GetOpencurl() != null)
+        {
+            node.GetOpencurl().Apply(this);
+        }
+        if(node.GetClosedparenth() != null)
+        {
+            node.GetClosedparenth().Apply(this);
+        }
+        if(node.GetOpenparenth() != null)
+        {
+            node.GetOpenparenth().Apply(this);
+        }
+        if(node.GetMethodName() != null)
+        {
+            node.GetMethodName().Apply(this);
+        }
+        if(node.GetFunction() != null)
+        {
+            node.GetFunction().Apply(this);
+        }
+        OutAWithoutParamMethod(node);
     }
     public virtual void InAMethodCall(AMethodCall node)
     {
@@ -2479,22 +2386,22 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutAStringParamActualParameters(node);
     }
-    public virtual void InAIntParametersActualParameters(AIntParametersActualParameters node)
+    public virtual void InAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAIntParametersActualParameters(AIntParametersActualParameters node)
+    public virtual void OutAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAIntParametersActualParameters(AIntParametersActualParameters node)
+    public override void CaseAExpressionParamActualParameters(AExpressionParamActualParameters node)
     {
-        InAIntParametersActualParameters(node);
-        if(node.GetIntlit() != null)
+        InAExpressionParamActualParameters(node);
+        if(node.GetExpressions() != null)
         {
-            node.GetIntlit().Apply(this);
+            node.GetExpressions().Apply(this);
         }
         if(node.GetComma() != null)
         {
@@ -2504,152 +2411,45 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetActualParameters().Apply(this);
         }
-        OutAIntParametersActualParameters(node);
+        OutAExpressionParamActualParameters(node);
     }
-    public virtual void InAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public virtual void InALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public virtual void OutALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAFloatParametersActualParameters(AFloatParametersActualParameters node)
+    public override void CaseALastParamStringActualParameters(ALastParamStringActualParameters node)
     {
-        InAFloatParametersActualParameters(node);
-        if(node.GetFloatlit() != null)
-        {
-            node.GetFloatlit().Apply(this);
-        }
-        if(node.GetComma() != null)
-        {
-            node.GetComma().Apply(this);
-        }
-        if(node.GetActualParameters() != null)
-        {
-            node.GetActualParameters().Apply(this);
-        }
-        OutAFloatParametersActualParameters(node);
-    }
-    public virtual void InAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAVarParametersActualParameters(AVarParametersActualParameters node)
-    {
-        InAVarParametersActualParameters(node);
-        if(node.GetId() != null)
-        {
-            node.GetId().Apply(this);
-        }
-        if(node.GetComma() != null)
-        {
-            node.GetComma().Apply(this);
-        }
-        if(node.GetActualParameters() != null)
-        {
-            node.GetActualParameters().Apply(this);
-        }
-        OutAVarParametersActualParameters(node);
-    }
-    public virtual void InAStringActualParameters(AStringActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAStringActualParameters(AStringActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAStringActualParameters(AStringActualParameters node)
-    {
-        InAStringActualParameters(node);
+        InALastParamStringActualParameters(node);
         if(node.GetString() != null)
         {
             node.GetString().Apply(this);
         }
-        OutAStringActualParameters(node);
+        OutALastParamStringActualParameters(node);
     }
-    public virtual void InAVariableActualParameters(AVariableActualParameters node)
+    public virtual void InALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAVariableActualParameters(AVariableActualParameters node)
+    public virtual void OutALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAVariableActualParameters(AVariableActualParameters node)
+    public override void CaseALastParamExpressionActualParameters(ALastParamExpressionActualParameters node)
     {
-        InAVariableActualParameters(node);
-        if(node.GetId() != null)
+        InALastParamExpressionActualParameters(node);
+        if(node.GetExpressions() != null)
         {
-            node.GetId().Apply(this);
+            node.GetExpressions().Apply(this);
         }
-        OutAVariableActualParameters(node);
-    }
-    public virtual void InAIntActualParameters(AIntActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAIntActualParameters(AIntActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAIntActualParameters(AIntActualParameters node)
-    {
-        InAIntActualParameters(node);
-        if(node.GetIntlit() != null)
-        {
-            node.GetIntlit().Apply(this);
-        }
-        OutAIntActualParameters(node);
-    }
-    public virtual void InAFloatActualParameters(AFloatActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAFloatActualParameters(AFloatActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAFloatActualParameters(AFloatActualParameters node)
-    {
-        InAFloatActualParameters(node);
-        if(node.GetFloatlit() != null)
-        {
-            node.GetFloatlit().Apply(this);
-        }
-        OutAFloatActualParameters(node);
-    }
-    public virtual void InANothingActualParameters(ANothingActualParameters node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutANothingActualParameters(ANothingActualParameters node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseANothingActualParameters(ANothingActualParameters node)
-    {
-        InANothingActualParameters(node);
-        OutANothingActualParameters(node);
+        OutALastParamExpressionActualParameters(node);
     }
     public virtual void InAManyParametersFormalParameters(AManyParametersFormalParameters node)
     {
@@ -2842,19 +2642,46 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutAWhileStatement(node);
     }
-    public virtual void InAAssignIntAssignment(AAssignIntAssignment node)
+    public virtual void InAVarDeclareStatement(AVarDeclareStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAAssignIntAssignment(AAssignIntAssignment node)
+    public virtual void OutAVarDeclareStatement(AVarDeclareStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAAssignIntAssignment(AAssignIntAssignment node)
+    public override void CaseAVarDeclareStatement(AVarDeclareStatement node)
     {
-        InAAssignIntAssignment(node);
+        InAVarDeclareStatement(node);
+        if(node.GetSemicolon() != null)
+        {
+            node.GetSemicolon().Apply(this);
+        }
+        if(node.GetVarName() != null)
+        {
+            node.GetVarName().Apply(this);
+        }
+        if(node.GetVarType() != null)
+        {
+            node.GetVarType().Apply(this);
+        }
+        OutAVarDeclareStatement(node);
+    }
+    public virtual void InAAssignExpressionAssignment(AAssignExpressionAssignment node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAAssignExpressionAssignment(AAssignExpressionAssignment node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAAssignExpressionAssignment(AAssignExpressionAssignment node)
+    {
+        InAAssignExpressionAssignment(node);
         if(node.GetSemicolon() != null)
         {
             node.GetSemicolon().Apply(this);
@@ -2871,81 +2698,7 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetIntName().Apply(this);
         }
-        OutAAssignIntAssignment(node);
-    }
-    public virtual void InAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAVarDeclareAssignment(AVarDeclareAssignment node)
-    {
-        InAVarDeclareAssignment(node);
-        if(node.GetSemicolon() != null)
-        {
-            node.GetSemicolon().Apply(this);
-        }
-        if(node.GetVarName() != null)
-        {
-            node.GetVarName().Apply(this);
-        }
-        if(node.GetVarType() != null)
-        {
-            node.GetVarType().Apply(this);
-        }
-        OutAVarDeclareAssignment(node);
-    }
-    public virtual void InAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAArrayAssignMathIndexAssignment(AArrayAssignMathIndexAssignment node)
-    {
-        InAArrayAssignMathIndexAssignment(node);
-        if(node.GetSemicolon() != null)
-        {
-            node.GetSemicolon().Apply(this);
-        }
-        if(node.GetEndCb() != null)
-        {
-            node.GetEndCb().Apply(this);
-        }
-        if(node.GetActualParameters() != null)
-        {
-            node.GetActualParameters().Apply(this);
-        }
-        if(node.GetEndOb() != null)
-        {
-            node.GetEndOb().Apply(this);
-        }
-        if(node.GetEqual() != null)
-        {
-            node.GetEqual().Apply(this);
-        }
-        if(node.GetStartCb() != null)
-        {
-            node.GetStartCb().Apply(this);
-        }
-        if(node.GetStartOb() != null)
-        {
-            node.GetStartOb().Apply(this);
-        }
-        if(node.GetVarName() != null)
-        {
-            node.GetVarName().Apply(this);
-        }
-        OutAArrayAssignMathIndexAssignment(node);
+        OutAAssignExpressionAssignment(node);
     }
     public virtual void InAArrayAssignAssignment(AArrayAssignAssignment node)
     {
@@ -3099,19 +2852,19 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutAArrayIndexNumDeclare(node);
     }
-    public virtual void InAIf(AIf node)
+    public virtual void InAIfElseIf(AIfElseIf node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAIf(AIf node)
+    public virtual void OutAIfElseIf(AIfElseIf node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAIf(AIf node)
+    public override void CaseAIfElseIf(AIfElseIf node)
     {
-        InAIf(node);
+        InAIfElseIf(node);
         if(node.GetElsepart() != null)
         {
             node.GetElsepart().Apply(this);
@@ -3140,7 +2893,46 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetIflit().Apply(this);
         }
-        OutAIf(node);
+        OutAIfElseIf(node);
+    }
+    public virtual void InAIfIf(AIfIf node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAIfIf(AIfIf node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAIfIf(AIfIf node)
+    {
+        InAIfIf(node);
+        if(node.GetSemicolon() != null)
+        {
+            node.GetSemicolon().Apply(this);
+        }
+        if(node.GetClosecurl() != null)
+        {
+            node.GetClosecurl().Apply(this);
+        }
+        if(node.GetStatements() != null)
+        {
+            node.GetStatements().Apply(this);
+        }
+        if(node.GetOpencurl() != null)
+        {
+            node.GetOpencurl().Apply(this);
+        }
+        if(node.GetExpressions() != null)
+        {
+            node.GetExpressions().Apply(this);
+        }
+        if(node.GetIflit() != null)
+        {
+            node.GetIflit().Apply(this);
+        }
+        OutAIfIf(node);
     }
     public virtual void InAElseElsepart(AElseElsepart node)
     {
@@ -3176,21 +2968,6 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
             node.GetElse().Apply(this);
         }
         OutAElseElsepart(node);
-    }
-    public virtual void InANoElseElsepart(ANoElseElsepart node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutANoElseElsepart(ANoElseElsepart node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseANoElseElsepart(ANoElseElsepart node)
-    {
-        InANoElseElsepart(node);
-        OutANoElseElsepart(node);
     }
     public virtual void InAWhile(AWhile node)
     {
@@ -3284,33 +3061,6 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
             node.GetExpressions().Apply(this);
         }
         OutAOrExpressions(node);
-    }
-    public virtual void InANotExpressions(ANotExpressions node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutANotExpressions(ANotExpressions node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseANotExpressions(ANotExpressions node)
-    {
-        InANotExpressions(node);
-        if(node.GetLogicalCompare() != null)
-        {
-            node.GetLogicalCompare().Apply(this);
-        }
-        if(node.GetNot() != null)
-        {
-            node.GetNot().Apply(this);
-        }
-        if(node.GetExpressions() != null)
-        {
-            node.GetExpressions().Apply(this);
-        }
-        OutANotExpressions(node);
     }
     public virtual void InANoLogOpExpressions(ANoLogOpExpressions node)
     {

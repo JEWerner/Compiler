@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="analysis.cs" />
-    <Compile Include="Definition_Smith_Werner.cs" />
+    <Compile Include="Definition_Smith.cs" />
     <Compile Include="lexer.cs" />
     <Compile Include="nodes.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -53,8 +53,9 @@
     </Compile>
     <Compile Include="prods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SemaniticMainSmith.cs" />
+    <Compile Include="SemanticAnalyzerSmith.cs" />
     <Compile Include="tokens.cs" />
-    <Compile Include="werner_parser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
