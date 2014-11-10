@@ -50,10 +50,12 @@ namespace parser
         {
         }
 		
-        public override void OutAMethod(comp5210.node.AMethod node)
+        public override void OutAWithParamMethod(comp5210.node.AWithParamMethod node)
         {
         }
-		
+        public override void OutAWithoutParamMethod(comp5210.node.AWithoutParamMethod node)
+        {
+        }		
         public override void OutAMethod_call(comp5210.node.AMethodCall node)
         {
         }
@@ -101,7 +103,7 @@ namespace parser
         {
         }
 		
-        public override void OutAAssign_intAssignment(comp5210.node.A node)
+        public override void OutAAssignExpression(comp5210.node.AAssignExpressionAssignment node)
         {
         }	
         public override void OutAVar_DeclareAssignment(comp5210.node.AVarDeclareStatement node)
@@ -111,23 +113,25 @@ namespace parser
         {
         }	
 			
-        public override void OutAIntdeclNum_declare(comp5210.node.AIntdeclNum_declare node)
+        public override void OutAIntdeclNum_declare(comp5210.node.AIntdeclNumDeclare node)
         {
         }
-        public override void OutAFloatdeclNum_declare(comp5210.node.AFloatdeclNum_declare node)
+        public override void OutAFloatdeclNum_declare(comp5210.node.AFloatdeclNumDeclare node)
         {
         }
-        public override void OutAArray_indexNum_declare(comp5210.node.AArray_indexNum_declare node)
+        public override void OutAArray_indexNum_declare(comp5210.node.AArrayIndexNumDeclare node)
         {
         }
 		
         public override void OutAElseElsepart(comp5210.node.AElseElsepart node)
         {
         }
-        public override void OutANo_elseElsepart(comp5210.node. node)
+        public override void OutAIfElseIf(comp5210.node.AIfElseIf node)
         {
         }
-		
+        public override void OutAIf_If(comp5210.node.AIfIf node)
+        {
+        }
         public override void OutAWhile(comp5210.node.AWhile node)
         {
         }
@@ -136,9 +140,6 @@ namespace parser
         {
         }
         public override void OutAOrExpressions(comp5210.node.AOrExpressions node)
-        {
-        }
-        public override void OutANotExpressions(comp5210.node.Ano node)
         {
         }
         public override void OutANo_log_opExpressions(comp5210.node.ANoLogOpExpressions node)
