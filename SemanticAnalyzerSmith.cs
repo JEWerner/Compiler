@@ -30,34 +30,136 @@ namespace parser
             stringhash.Add(flttype.name, flttype);
         }
 		
-        public override void OutAManyConstants(comp5210.node.AManyConstants node)
-        {
-            
-        }
-        public override void OutANothingConstants(comp5210.node.ANothingConstants node)
-        {
-        }
-		
+
         public override void OutAIntdeclConst_declare(comp5210.node.AIntdeclConstDeclare node)
         {
-          
+            string typename = node.GetVarType().Text;
+            string varname = node.GetVarName().Text;
+            Definition typedefn;
+            Definition stuff;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(typename,out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    typename + " is not defined.");
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    typename + " is an invalid type.");
+            }
+			
+			
+			//Changed this
+			else if (stringhash.TryGetValue(varname,out stuff ))
+			{
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    varname + " is already declared.");
+			}
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
         }
         public override void OutAFloatdeclConst_declare(comp5210.node.AFloatdeclConstDeclare node)
         {
+            string typename = node.GetVarType().Text;
+            string varname = node.GetVarName().Text;
+            Definition typedefn;
+            Definition stuff;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(typename, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    typename + " is not defined.");
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    typename + " is an invalid type.");
+            }
+
+
+            //Changed this
+            else if (stringhash.TryGetValue(varname, out stuff))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    varname + " is already declared.");
+            }
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
         }
 		
-        public override void OutAMany_methodsMethods(comp5210.node.AManyMethodsMethods node)
-        {
-        }
-        public override void OutALast_methodMethods(comp5210.node.ALastMethodMethods node)
-        {
-        }
 		
         public override void OutAWithParamMethod(comp5210.node.AWithParamMethod node)
         {
+            
+            string methodname = node.GetMethodName().Text;
+         
+            Definition typedefn;
+            
+
+            // lookup the type
+            if (stringhash.TryGetValue(methodname, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
+                    methodname + " is already defined.");
+            }
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                MethodDefinition methdefn = new MethodDefinition();
+                methdefn.name = methodname;
+                stringhash.Add(methdefn.name, methdefn);
+            }
         }
         public override void OutAWithoutParamMethod(comp5210.node.AWithoutParamMethod node)
         {
+
+            string methodname = node.GetMethodName().Text;
+
+            Definition typedefn;
+
+
+            // lookup the type
+            if (stringhash.TryGetValue(methodname, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
+                    methodname + " is already defined.");
+            }
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                MethodDefinition methdefn = new MethodDefinition();
+                methdefn.name = methodname;
+                stringhash.Add(methdefn.name, methdefn);
+            }
         }		
         public override void OutAMethod_call(comp5210.node.AMethodCall node)
         {

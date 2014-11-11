@@ -31,4 +31,7 @@ namespace parser
     {
         public System.Collections.Generic.List<VariableDefinition> list;
     }
+    public class MethodDefinition : SubprogramDefinition
+    {
+    }
 }
