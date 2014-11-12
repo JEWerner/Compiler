@@ -430,11 +430,9 @@ namespace parser
         public override void OutAArrayAssignAssignment(comp5210.node.AArrayAssignAssignment node)
         {
             string typename = node.GetVarName().Text;
-            Definition inter, name, outer;
+            Definition inter, name, outer, inttype;
 
-            BasicType inttype = new BasicType();
-            inttype.name = "int";
-
+            stringhash.TryGetValue("int", out inttype);
             nodehash.TryGetValue(node.GetInternalMath(), out inter);
             nodehash.TryGetValue(node.GetExternalMath(), out outer);
             stringhash.TryGetValue(node.GetVarName().Text, out name);
@@ -473,13 +471,12 @@ namespace parser
         public override void OutAIntdeclNumDeclare(comp5210.node.AIntdeclNumDeclare node)
         {
             Console.WriteLine("test pnt 3");
-            BasicType inttype = new BasicType();
-            inttype.name = "int";
 
             string varname = node.GetVarName().Text;
             string vartype = node.GetVarType().Text;
 
-            Definition typedefn, stuff;
+            Definition typedefn, stuff, inttype;
+            stringhash.TryGetValue("int", out inttype);
             // lookup the type see if it's in the table
             if (!stringhash.TryGetValue(vartype, out typedefn))
             {
@@ -513,12 +510,11 @@ namespace parser
         public override void OutAFloatdeclNumDeclare(comp5210.node.AFloatdeclNumDeclare node)
         {
             Console.WriteLine("test pnt 6");
-            FloatType flttype = new FloatType();
-            flttype.name = "float";
 
             string varname = node.GetVarName().Text;
             string vartype = node.GetVarType().Text;
-            Definition typedefn, stuff;
+            Definition typedefn, stuff, flttype;
+            stringhash.TryGetValue("float", out flttype);
             // lookup the type see if it's in the table
             if (!stringhash.TryGetValue(vartype, out typedefn))
             {
@@ -593,10 +589,8 @@ namespace parser
 		
         public override void OutAIfElseIf(comp5210.node.AIfElseIf node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition exprtype;
+            Definition exprtype, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out exprtype);
             if (exprtype != booltype)
             {
@@ -637,10 +631,8 @@ namespace parser
         }
         public override void OutAWhile(comp5210.node.AWhile node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition exprtype;
+            Definition booltype, exprtype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out exprtype);
             if (exprtype != booltype)
             {
@@ -657,10 +649,8 @@ namespace parser
 		
         public override void OutAAndExpressions(comp5210.node.AAndExpressions node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out lhs);
             nodehash.TryGetValue(node.GetLogicalCompare(), out rhs);
             // make sure left hand side and right hand side match
@@ -678,10 +668,8 @@ namespace parser
         }
         public override void OutAOrExpressions(comp5210.node.AOrExpressions node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out lhs);
             nodehash.TryGetValue(node.GetLogicalCompare(), out rhs);
             // make sure left hand side and right hand side match
@@ -706,10 +694,8 @@ namespace parser
 
         public override void OutAGreaterLogicalCompare(comp5210.node.AGreaterLogicalCompare node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
@@ -727,10 +713,8 @@ namespace parser
         }
         public override void OutALessThanLogicalCompare(comp5210.node.ALessThanLogicalCompare node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
@@ -748,10 +732,8 @@ namespace parser
         }
         public override void OutAGreaterThanEqualToLogicalCompare(comp5210.node.AGreaterThanEqualToLogicalCompare node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
@@ -769,10 +751,8 @@ namespace parser
         }
         public override void OutALessThanEqualToLogicalCompare(comp5210.node.ALessThanEqualToLogicalCompare node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
@@ -790,10 +770,8 @@ namespace parser
         }
         public override void OutAEqualToLogicalCompare(comp5210.node.AEqualToLogicalCompare node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
-            Definition rhs, lhs;
+            Definition rhs, lhs, booltype;
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
