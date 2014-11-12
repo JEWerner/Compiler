@@ -352,6 +352,21 @@ namespace parser
         }
         public override void OutAArrayParenth(comp5210.node.AArrayParenth node)
         {
+            string variable = node.GetId().Text;
+            Definition typedefn;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(variable, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetId().Line + "]: " +
+                    variable + " is not defined.");
+            }
+            // check to make sure what we got back is not a type
+            else if ((typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetId().Line + "]: " +
+                    variable + " is an invalid type.");
+            }
         }
         public override void OutAVariableParenth(comp5210.node.AVariableParenth node)
         {
