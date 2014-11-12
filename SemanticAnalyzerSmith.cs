@@ -405,12 +405,43 @@ namespace parser
 
         public override void OutAMultiplyMultiDiv(comp5210.node.AMultiplyMultiDiv node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetMultiDiv(), out lhs);
+            nodehash.TryGetValue(node.GetParenth(), out rhs);
+            // make sure left hand side and right hand side match
+            // of course, you should really make sure left side is
+            // a variable first
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetMulti().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetParenth(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutADivideMultiDiv(comp5210.node.ADivideMultiDiv node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetMultiDiv(), out lhs);
+            nodehash.TryGetValue(node.GetParenth(), out rhs);
+            // make sure left hand side and right hand side match
+            // of course, you should really make sure left side is
+            // a variable first
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetDiv().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetParenth(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutANoMoreDivMultiMultiDiv(comp5210.node.ANoMoreDivMultiMultiDiv node)
         {
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetParenth(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
 		
         public override void OutAParenthParenth(comp5210.node.AParenthParenth node)
