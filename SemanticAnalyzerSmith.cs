@@ -376,21 +376,84 @@ namespace parser
 
         public override void OutAGreaterLogicalCompare(comp5210.node.AGreaterLogicalCompare node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetSide1(), out lhs);
+            nodehash.TryGetValue(node.GetSide2(), out rhs);
+            // make sure left hand side and right hand side match
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetGrtr().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutALessThanLogicalCompare(comp5210.node.ALessThanLogicalCompare node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetSide1(), out lhs);
+            nodehash.TryGetValue(node.GetSide2(), out rhs);
+            // make sure left hand side and right hand side match
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetLessthan().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutAGreaterThanEqualToLogicalCompare(comp5210.node.AGreaterThanEqualToLogicalCompare node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetSide1(), out lhs);
+            nodehash.TryGetValue(node.GetSide2(), out rhs);
+            // make sure left hand side and right hand side match
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetGrtreqto().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutALessThanEqualToLogicalCompare(comp5210.node.ALessThanEqualToLogicalCompare node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetSide1(), out lhs);
+            nodehash.TryGetValue(node.GetSide2(), out rhs);
+            // make sure left hand side and right hand side match
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetLesseqto().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutAEqualToLogicalCompare(comp5210.node.AEqualToLogicalCompare node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetSide1(), out lhs);
+            nodehash.TryGetValue(node.GetSide2(), out rhs);
+            // make sure left hand side and right hand side match
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetEqto().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutANoLogCompareLogicalCompare(comp5210.node.ANoLogCompareLogicalCompare node)
         {
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetAddSub(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
 
         public override void OutAAddAddSub(comp5210.node.AAddAddSub node)
@@ -400,8 +463,6 @@ namespace parser
             nodehash.TryGetValue(node.GetAddSub(), out lhs);
             nodehash.TryGetValue(node.GetMultiDiv(), out rhs);
             // make sure left hand side and right hand side match
-            // of course, you should really make sure left side is
-            // a variable first
             if ((lhs as VariableDefinition).vartype != rhs)
             {
                 Console.WriteLine("[" + node.GetPlus().Line + "]: " +
@@ -417,8 +478,6 @@ namespace parser
             nodehash.TryGetValue(node.GetAddSub(), out lhs);
             nodehash.TryGetValue(node.GetMultiDiv(), out rhs);
             // make sure left hand side and right hand side match
-            // of course, you should really make sure left side is
-            // a variable first
             if ((lhs as VariableDefinition).vartype != rhs)
             {
                 Console.WriteLine("[" + node.GetSub().Line + "]: " +
@@ -441,8 +500,6 @@ namespace parser
             nodehash.TryGetValue(node.GetMultiDiv(), out lhs);
             nodehash.TryGetValue(node.GetParenth(), out rhs);
             // make sure left hand side and right hand side match
-            // of course, you should really make sure left side is
-            // a variable first
             if ((lhs as VariableDefinition).vartype != rhs)
             {
                 Console.WriteLine("[" + node.GetMulti().Line + "]: " +
@@ -458,8 +515,6 @@ namespace parser
             nodehash.TryGetValue(node.GetMultiDiv(), out lhs);
             nodehash.TryGetValue(node.GetParenth(), out rhs);
             // make sure left hand side and right hand side match
-            // of course, you should really make sure left side is
-            // a variable first
             if ((lhs as VariableDefinition).vartype != rhs)
             {
                 Console.WriteLine("[" + node.GetDiv().Line + "]: " +
