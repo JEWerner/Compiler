@@ -415,6 +415,9 @@ namespace parser
 		
         public override void OutAParenthParenth(comp5210.node.AParenthParenth node)
         {
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetExpressions(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutAIntParenth(comp5210.node.AIntParenth node)
         {
