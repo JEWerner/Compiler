@@ -346,14 +346,24 @@ namespace parser
         }
         public override void OutAIntParenth(comp5210.node.AIntParenth node)
         {
+            BasicType inttype = new BasicType();
+            inttype.name = "int";
+            nodehash.Add(node, inttype);
         }
         public override void OutAFloatParenth(comp5210.node.AFloatParenth node)
         {
+            BasicType flttype = new BasicType();
+            flttype.name = "float";
+            nodehash.Add(node, flttype);
         }
         public override void OutAArrayParenth(comp5210.node.AArrayParenth node)
         {
+            BasicType inttype = new BasicType();
+            inttype.name = "int";
             string variable = node.GetId().Text;
             Definition typedefn;
+            Definition rhs;
+            nodehash.TryGetValue(node.GetExpressions(), out rhs);
 
             // lookup the type
             if (!stringhash.TryGetValue(variable, out typedefn))
@@ -362,10 +372,22 @@ namespace parser
                     variable + " is not defined.");
             }
             // check to make sure what we got back is not a type
-            else if ((typedefn is TypeDefinition))
+            else if (typedefn is TypeDefinition)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is an invalid type.");
+            }
+            
+            else if(rhs != inttype)
+            {
+                Console.WriteLine("[" + node.GetId().Line + "]: " +
+                    node.GetExpressions() + " is an invalid index.");
+            }
+            else
+            {
+                VariableDefinition total = new VariableDefinition();
+                total.vartype = typedefn as TypeDefinition;
+                nodehash.Add(node, total);
             }
         }
         public override void OutAVariableParenth(comp5210.node.AVariableParenth node)
@@ -380,10 +402,16 @@ namespace parser
                     variable + " is not defined.");
             }
             // check to make sure what we got back is not a type
-            else if ((typedefn is TypeDefinition))
+            else if (typedefn is TypeDefinition)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is an invalid type.");
+            }
+            else
+            {                
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.vartype = typedefn as TypeDefinition;
+                nodehash.Add(node, vardefn);
             }
         }
     }

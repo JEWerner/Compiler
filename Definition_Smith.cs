@@ -9,29 +9,29 @@ namespace parser
     {
         public string name;
     }
-    public abstract class TypeDefinition : Definition
-    {
-    }
-    public class BasicType : TypeDefinition
-    {        
-    }
-    public class Array : TypeDefinition
-    {
-        public TypeDefinition vartype;
-        public int size;
-    }
-    public class VariableDefinition : Definition
-    {
-        public TypeDefinition vartype;
-    }
-    public abstract class SubprogramDefinition : Definition
-    {
-    }
-    public class Procedure : SubprogramDefinition
-    {
-        public System.Collections.Generic.List<VariableDefinition> list;
-    }
-    public class MethodDefinition : SubprogramDefinition
-    {
-    }
+        public abstract class TypeDefinition : Definition
+        {
+        }
+            public class BasicType : TypeDefinition
+            {
+            }
+            public class Array : TypeDefinition
+            {
+                public TypeDefinition vartype;
+                public int size;
+            }
+        public class VariableDefinition : Definition
+        {
+            public TypeDefinition vartype;
+        }
+        public abstract class SubprogramDefinition : Definition
+        {
+        }
+            public class Procedure : SubprogramDefinition
+            {
+                public System.Collections.Generic.List<VariableDefinition> list;
+            }
+            public class MethodDefinition : SubprogramDefinition
+            {
+            }
 }
