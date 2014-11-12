@@ -378,13 +378,12 @@ namespace parser
 
         public override void OutAAssignExpressionAssignment(comp5210.node.AAssignExpressionAssignment node)
         {
+            
             string typename = node.GetVarName().Text;
             Definition rhs, lhs;
             nodehash.TryGetValue(node.GetExpressions(), out rhs);
             stringhash.TryGetValue(node.GetVarName().Text, out lhs);
-            // make sure left hand side and right hand side match
-            // of course, you should really make sure left side is
-            // a variable first
+            
             if (!stringhash.TryGetValue(typename, out rhs))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
