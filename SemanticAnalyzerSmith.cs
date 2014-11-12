@@ -515,6 +515,41 @@ namespace parser
         }
         public override void OutAArrayIndexNumDeclare(comp5210.node.AArrayIndexNumDeclare node)
         {
+            string typename = node.GetVarType().Text;
+            string varname = node.GetVarName().Text;
+            Definition typedefn;
+            Definition stuff;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(typename, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    typename + " is not defined.");
+                nodehash.Add(node, null);
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    typename + " is an invalid type.");
+                nodehash.Add(node, null);
+            }
+            // lookup the variable
+            else if (stringhash.TryGetValue(varname, out stuff))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    varname + " is already declared.");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+                // add this variable to the hash table
+                Array vardefn = new Array();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                vardefn.size = Convert.ToInt32(node.GetIntlit().Text);
+                stringhash.Add(vardefn.name, vardefn);
+            }
         }
 		
         public override void OutAIfElseIf(comp5210.node.AIfElseIf node)
@@ -872,7 +907,7 @@ namespace parser
             }
             else
             {
-                VariableDefinition total = new VariableDefinition();
+                Array total = new Array();
                 total.vartype = typedefn as TypeDefinition;
                 nodehash.Add(node, total);
             }
