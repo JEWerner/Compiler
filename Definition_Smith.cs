@@ -15,6 +15,12 @@ namespace parser
             public class BasicType : TypeDefinition
             {
             }
+                public class IntType : BasicType
+                {
+                }
+                public class FloatType : BasicType
+                {
+                }
             public class Array : TypeDefinition
             {
                 public TypeDefinition vartype;
