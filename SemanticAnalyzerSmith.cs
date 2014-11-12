@@ -395,12 +395,43 @@ namespace parser
 
         public override void OutAAddAddSub(comp5210.node.AAddAddSub node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetAddSub(), out lhs);
+            nodehash.TryGetValue(node.GetMultiDiv(), out rhs);
+            // make sure left hand side and right hand side match
+            // of course, you should really make sure left side is
+            // a variable first
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetPlus().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutASubtractAddSub(comp5210.node.ASubtractAddSub node)
         {
+            Definition rhs, lhs;
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetAddSub(), out lhs);
+            nodehash.TryGetValue(node.GetMultiDiv(), out rhs);
+            // make sure left hand side and right hand side match
+            // of course, you should really make sure left side is
+            // a variable first
+            if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetSub().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
         public override void OutANoMoreAddSubAddSub(comp5210.node.ANoMoreAddSubAddSub node)
         {
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
 
         public override void OutAMultiplyMultiDiv(comp5210.node.AMultiplyMultiDiv node)
