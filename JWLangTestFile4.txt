@@ -1,13 +1,15 @@
 
 func main(int num){
-int test = 31;
-internalFunction(test);
+int test ;
+test = 31;
+
 };
 
 func second(string words){
-int index = 9;
-
-one = zero + one;
+int index ;
+index = 9;
+int one;
+one = 0 + one;
 one = 4 + 5;
 
 };

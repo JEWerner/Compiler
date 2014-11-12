@@ -1,12 +1,5 @@
-constant int test = 0;
-constant float try = 3.4;
 
-
-func test(int iHaveToBeHere){
-if one == 2 {
-three = 0.5;
-}; else {
-two = 4;
-};
-
+func test(){
+int x;
+x = 1;
 };

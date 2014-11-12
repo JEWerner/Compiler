@@ -30,7 +30,26 @@ namespace parser
             stringhash.Add(flttype.name, flttype);
         }
 
-
+        public override void OutAManyConstants(comp5210.node.AManyConstants node)
+        {
+            Definition constants;
+            nodehash.TryGetValue(node.GetConstDeclare(), out constants);
+            nodehash.Add(node, constants);
+        }
+       
+        public override void OutAManyMethodsMethods(comp5210.node.AManyMethodsMethods node)
+        {
+            Definition method;
+            nodehash.TryGetValue(node.GetMethod(), out method);
+            nodehash.Add(node, method);
+        }
+        public override void OutALastMethodMethods(comp5210.node.ALastMethodMethods node)
+        {
+            Definition method;
+            nodehash.TryGetValue(node.GetMethod(), out method);
+            nodehash.Add(node, method);
+        }
+        
         public override void OutAIntdeclConstDeclare(comp5210.node.AIntdeclConstDeclare node)
         {
             string typename = node.GetVarType().Text;
@@ -115,6 +134,7 @@ namespace parser
                 stringhash.Add(vardefn.name, vardefn);
             }
         }	
+       
         public override void OutAWithParamMethod(comp5210.node.AWithParamMethod node)
         {
             
@@ -269,7 +289,32 @@ namespace parser
                 stringhash.Add(vardefn.name, vardefn);
             }
         }
-
+       
+        public override void OutAManyStatementsStatements(comp5210.node.AManyStatementsStatements node)
+        {
+            Definition state;
+            nodehash.TryGetValue(node.GetStatement(), out state);
+            nodehash.Add(node, state);
+        }
+        public override void OutAOneStatementStatements(comp5210.node.AOneStatementStatements node)
+        {
+            Definition state;
+            nodehash.TryGetValue(node.GetStatement(), out state);
+            nodehash.Add(node, state);
+        }
+        
+        public override void OutANumDeclareStatement(comp5210.node.ANumDeclareStatement node)
+        {
+            Definition numdecl;
+            nodehash.TryGetValue(node.GetNumDeclare(), out numdecl);
+            nodehash.Add(node, numdecl);
+        }
+        public override void OutAAssignmentStatement(comp5210.node.AAssignmentStatement node)
+        {
+            Definition assign;
+            nodehash.TryGetValue(node.GetAssignment(), out assign);
+            nodehash.Add(node, assign);
+        } 
         public override void OutAVarDeclareStatement(comp5210.node.AVarDeclareStatement node)
         {
             string typename = node.GetVarType().Text;
@@ -312,6 +357,24 @@ namespace parser
                 stringhash.Add(vardefn.name, vardefn);
             }
         }
+        public override void OutAIfStatement(comp5210.node.AIfStatement node)
+        {
+            Definition ifstate;
+            nodehash.TryGetValue(node.GetIf(), out ifstate);
+            nodehash.Add(node, ifstate);
+        }
+        public override void OutAWhileStatement(comp5210.node.AWhileStatement node)
+        {
+            Definition whilestate;
+            nodehash.TryGetValue(node.GetWhile(), out whilestate);
+            nodehash.Add(node, whilestate);
+        }
+        public override void OutAMethodCallStatement(comp5210.node.AMethodCallStatement node)
+        {
+            Definition meth;
+            nodehash.TryGetValue(node.GetMethodCall(), out meth);
+            nodehash.Add(node, meth);
+        }
 
         public override void OutAAssignExpressionAssignment(comp5210.node.AAssignExpressionAssignment node)
         {
@@ -336,7 +399,6 @@ namespace parser
             }               
             
         }
-
         public override void OutAArrayAssignAssignment(comp5210.node.AArrayAssignAssignment node)
         {
         }
@@ -411,6 +473,7 @@ namespace parser
         }
         public override void OutANoMoreDivMultiMultiDiv(comp5210.node.ANoMoreDivMultiMultiDiv node)
         {
+            
         }
 		
         public override void OutAParenthParenth(comp5210.node.AParenthParenth node)
