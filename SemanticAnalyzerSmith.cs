@@ -15,13 +15,13 @@ namespace parser
         // add int and float
         public override void InAProgram(comp5210.node.AProgram node)
         {
-            BasicType inttype = new BasicType();
+            IntType inttype = new IntType();
             inttype.name = "int";
-            BasicType flttype = new BasicType();
+            FloatType flttype = new FloatType();
             flttype.name = "float";
-            BasicType stringtype = new BasicType();
+            StringType stringtype = new StringType();
             stringtype.name = "string";
-            BasicType booltype = new BasicType();
+            BooleanType booltype = new BooleanType();
             booltype.name = "boolean";
 
             stringhash.Add(booltype.name, booltype);
@@ -52,6 +52,7 @@ namespace parser
         
         public override void OutAIntdeclConstDeclare(comp5210.node.AIntdeclConstDeclare node)
         {
+            Console.WriteLine("test int const");
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
             Definition typedefn;
@@ -94,6 +95,7 @@ namespace parser
         }
         public override void OutAFloatdeclConstDeclare(comp5210.node.AFloatdeclConstDeclare node)
         {
+            Console.WriteLine("test float const");
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
             Definition typedefn;
@@ -317,11 +319,12 @@ namespace parser
         } 
         public override void OutAVarDeclareStatement(comp5210.node.AVarDeclareStatement node)
         {
+            
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
             Definition typedefn;
             Definition stuff;
-
+            Console.WriteLine("Test "+ typename+" "+varname);
             // lookup the type
             if (!stringhash.TryGetValue(typename, out typedefn))
             {
@@ -351,11 +354,11 @@ namespace parser
                 // add this variable to the hash table
                 // note you need to add checks to make sure this 
                 // variable name isn't already defined.
+                Console.WriteLine("good code");
                 VariableDefinition vardefn = new VariableDefinition();
                 vardefn.name = varname;
                 vardefn.vartype = typedefn as TypeDefinition;
-                stringhash.Add(vardefn.name, vardefn);
-            }
+                stringhash.Add(vardefn.name, vardefn);            }
         }
         public override void OutAIfStatement(comp5210.node.AIfStatement node)
         {
@@ -383,7 +386,7 @@ namespace parser
             Definition rhs, lhs;
             nodehash.TryGetValue(node.GetExpressions(), out rhs);
             stringhash.TryGetValue(node.GetVarName().Text, out lhs);
-            
+            Console.WriteLine(lhs.name + " " + rhs.GetType().ToString());
             if (!stringhash.TryGetValue(typename, out rhs))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
@@ -444,6 +447,7 @@ namespace parser
 
         public override void OutAIntdeclNumDeclare(comp5210.node.AIntdeclNumDeclare node)
         {
+            Console.WriteLine("test pnt 3");
             BasicType inttype = new BasicType();
             inttype.name = "int";
 
@@ -480,12 +484,12 @@ namespace parser
         }
         public override void OutAFloatdeclNumDeclare(comp5210.node.AFloatdeclNumDeclare node)
         {
-            BasicType flttype = new BasicType();
+            Console.WriteLine("test pnt 6");
+            FloatType flttype = new FloatType();
             flttype.name = "float";
 
             string varname = node.GetVarName().Text;
             string vartype = node.GetVarType().Text;
-
             Definition typedefn, stuff;
             // lookup the type see if it's in the table
             if (!stringhash.TryGetValue(vartype, out typedefn))
@@ -498,7 +502,7 @@ namespace parser
             else if (typedefn != flttype)
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
-                    varname + " is the wrong type, int.");
+                    varname + " is the wrong type, float.");
                 nodehash.Add(node, null);
             }
             // checks if varname is already in table

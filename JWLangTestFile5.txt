@@ -1,7 +1,5 @@
-
-func second(int num, int help){
-int index ;
-index = 9;
-float test;
-test = 0;
+constant int x = 2;
+constant float y = 2;
+func main(){
+int test;
 };

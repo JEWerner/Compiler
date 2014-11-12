@@ -1,0 +1,45 @@
+constant int constanttest = 4;
+constant y x = 0;
+
+func test(){
+int booltest;
+int xtest;
+
+float xfloat;
+int xint;
+xint = 5;
+int arraywork[4];
+
+
+
+y x;
+
+int array = new array[10.5];
+int array;
+if(booltest){}
+while(booltest){}
+while(int){}
+while(undeclared){}
+while(array2[0] = array2[0]){}
+while(int[0] = int[0]){}
+while(array[4.4] = array[4.4]){}
+xtest = 3 + 3.3;
+xtest = (3 = 3) + (2 = 3);
+while((3 = 3) and 4){}
+while(4 and 4){}
+while((3 = 3) < 4){}
+while(4 < 4){}
+undeclared = xtest;
+int = xtest;
+constant = 5;
+xfloat = xint;
+undeclared[4] = 4;
+int[4] = 4;
+int arraynotwork[4.4];
+arraywork[4] = 4.4;
+func function(int x, float y){}
+func function2(int x, int x){}
+function3(xint, xfloat);
+xtest(xint, xfloat);
+function(float xfloat; int xint){};
+}
