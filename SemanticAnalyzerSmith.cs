@@ -62,14 +62,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, typedefn);
+                nodehash.Add(node, null);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, typedefn);
+                nodehash.Add(node, null);
             }
 			
 			
@@ -78,7 +78,7 @@ namespace parser
 			{
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, typedefn);
+                nodehash.Add(node, null);
 			}
 
             else
@@ -104,14 +104,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, typedefn);
+                nodehash.Add(node, null);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, typedefn);
+                nodehash.Add(node, null);
             }
 
 
@@ -120,7 +120,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, typedefn);
+                nodehash.Add(node, null);
             }
 
             else
@@ -389,25 +389,129 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, lhs);
+                nodehash.Add(node, null);
             }
             else if ((lhs as VariableDefinition).vartype != rhs)
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
+            }
+            else
+            {
                 nodehash.Add(node, rhs);
-            }               
+            }  
             
         }
         public override void OutAArrayAssignAssignment(comp5210.node.AArrayAssignAssignment node)
         {
+            string typename = node.GetVarName().Text;
+            Definition inter, name, outer;
+
+            BasicType inttype = new BasicType();
+            inttype.name = "int";
+
+            nodehash.TryGetValue(node.GetInternalMath(), out inter);
+            nodehash.TryGetValue(node.GetExternalMath(), out outer);
+            stringhash.TryGetValue(node.GetVarName().Text, out name);
+            // make sure left hand side and right hand side match
+            // of course, you should really make sure left side is
+            // a variable first
+            if (!stringhash.TryGetValue(typename, out name))
+            {
+                Console.WriteLine("[" + node.GetVarName().Line + "]: " +
+                    typename + " is not defined.");
+                nodehash.Add(node, null);
+            }
+            else if (inttype != inter)
+            {
+                Console.WriteLine("[" + node.GetEqual().Line + "]: " +
+                    "index is not of type int");
+                nodehash.Add(node, null);
+            }
+            else if ((name as VariableDefinition).vartype != outer)
+            {
+                Console.WriteLine("[" + node.GetEqual().Line + "]: " +
+                    "types don't match");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+                VariableDefinition varddef = new VariableDefinition();
+                varddef.vartype = name as TypeDefinition;
+                nodehash.Add(node, varddef);
+            }
         }
 
         public override void OutAIntdeclNumDeclare(comp5210.node.AIntdeclNumDeclare node)
         {
+            string varname = node.GetVarName().Text;
+            string vartype = node.GetVarType().Text;
+
+            Definition typedefn;
+            // lookup the type
+            if (!stringhash.TryGetValue(vartype, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    vartype + " is not defined.");
+                nodehash.Add(node, null);
+            }
+            else if (stringhash.TryGetValue(varname, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    varname + " is already defined.");
+                nodehash.Add(node, null);
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    vartype + " is an invalid type.");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+                
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
         }
         public override void OutAFloatdeclNumDeclare(comp5210.node.AFloatdeclNumDeclare node)
         {
+            string varname = node.GetVarName().Text;
+            string vartype = node.GetVarType().Text;
+
+            Definition typedefn;
+            // lookup the type
+            if (!stringhash.TryGetValue(vartype, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    vartype + " is not defined.");
+                nodehash.Add(node, null);
+            }
+            else if (stringhash.TryGetValue(varname, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    varname + " is already defined.");
+                nodehash.Add(node, null);
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
+                    vartype + " is an invalid type.");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
         }
         public override void OutAArrayIndexNumDeclare(comp5210.node.AArrayIndexNumDeclare node)
         {
