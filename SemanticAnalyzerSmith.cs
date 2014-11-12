@@ -23,8 +23,6 @@ namespace parser
             stringtype.name = "string";
             BooleanType booltype = new BooleanType();
             booltype.name = "boolean";
-            ErrorType errortype = new ErrorType();
-            booltype.name = "boolean";
 
             stringhash.Add(booltype.name, booltype);
             stringhash.Add(stringtype.name, stringtype);
@@ -34,6 +32,7 @@ namespace parser
 
         public override void OutAManyConstants(comp5210.node.AManyConstants node)
         {
+            // Add Constants to nodehash
             Definition constants;
             nodehash.TryGetValue(node.GetConstDeclare(), out constants);
             nodehash.Add(node, constants);
@@ -41,12 +40,14 @@ namespace parser
        
         public override void OutAManyMethodsMethods(comp5210.node.AManyMethodsMethods node)
         {
+            // Add method to nodehash
             Definition method;
             nodehash.TryGetValue(node.GetMethod(), out method);
             nodehash.Add(node, method);
         }
         public override void OutALastMethodMethods(comp5210.node.ALastMethodMethods node)
         {
+            // Add method to nodehash
             Definition method;
             nodehash.TryGetValue(node.GetMethod(), out method);
             nodehash.Add(node, method);
@@ -55,10 +56,10 @@ namespace parser
         public override void OutAIntdeclConstDeclare(comp5210.node.AIntdeclConstDeclare node)
         {
             Console.WriteLine("test int const");
+
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
-            Definition typedefn;
-            Definition stuff;
+            Definition typedefn, stuff;
 
             // lookup the type
             if (!stringhash.TryGetValue(typename,out typedefn))
@@ -76,22 +77,17 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-			
-			
-			//Changed this
-			else if (stringhash.TryGetValue(varname,out stuff ))
+			// check if the variable is already in the stringhash
+			else if (stringhash.TryGetValue(varname,out stuff))
 			{
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
 			}
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 VariableDefinition vardefn = new VariableDefinition();
                 vardefn.name = varname;
                 vardefn.vartype = typedefn as TypeDefinition;
@@ -101,10 +97,10 @@ namespace parser
         public override void OutAFloatdeclConstDeclare(comp5210.node.AFloatdeclConstDeclare node)
         {
             Console.WriteLine("test float const");
+
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
-            Definition typedefn;
-            Definition stuff;
+            Definition typedefn, stuff;
 
             // lookup the type
             if (!stringhash.TryGetValue(typename, out typedefn))
@@ -122,9 +118,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
-
-            //Changed this
+            // check if the variable is already in the stringhash
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
@@ -132,12 +126,9 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 VariableDefinition vardefn = new VariableDefinition();
                 vardefn.name = varname;
                 vardefn.vartype = typedefn as TypeDefinition;
@@ -146,13 +137,9 @@ namespace parser
         }	
        
         public override void OutAWithParamMethod(comp5210.node.AWithParamMethod node)
-        {
-            
-            string methodname = node.GetMethodName().Text;
-         
-            Definition typedefn;
-            
-
+        {            
+            string methodname = node.GetMethodName().Text;         
+            Definition typedefn; 
             // lookup the type
             if (stringhash.TryGetValue(methodname, out typedefn))
             {
@@ -161,12 +148,9 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 MethodDefinition methdefn = new MethodDefinition();
                 methdefn.name = methodname;
                 stringhash.Add(methdefn.name, methdefn);
@@ -174,12 +158,8 @@ namespace parser
         }
         public override void OutAWithoutParamMethod(comp5210.node.AWithoutParamMethod node)
         {
-
             string methodname = node.GetMethodName().Text;
-
             Definition typedefn;
-
-
             // lookup the type
             if (stringhash.TryGetValue(methodname, out typedefn))
             {
@@ -188,12 +168,9 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 MethodDefinition methdefn = new MethodDefinition();
                 methdefn.name = methodname;
                 stringhash.Add(methdefn.name, methdefn);
@@ -201,12 +178,8 @@ namespace parser
         }
         public override void OutAMethodCall(comp5210.node.AMethodCall node)
         {
-
             string methodname = node.GetMethodName().Text;
-
             Definition typedefn;
-
-
             // lookup the method name to ensure it exists
             if (!stringhash.TryGetValue(methodname, out typedefn))
             {
@@ -215,16 +188,13 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
         }
 
         public override void OutAManyParametersFormalParameters(comp5210.node.AManyParametersFormalParameters node)
         {
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
-            Definition typedefn;
-            Definition stuff;
-
+            Definition typedefn, stuff;
             // lookup the type
             if (!stringhash.TryGetValue(typename, out typedefn))
             {
@@ -241,9 +211,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
-
-            //Changed this
+            // check if the variable is already in the stringhash
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetComma().Line + "]: " +
@@ -251,12 +219,9 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 VariableDefinition vardefn = new VariableDefinition();
                 vardefn.name = varname;
                 vardefn.vartype = typedefn as TypeDefinition;
@@ -267,9 +232,7 @@ namespace parser
         {
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
-            Definition typedefn;
-            Definition stuff;
-
+            Definition typedefn, stuff;
             // lookup the type
             if (!stringhash.TryGetValue(typename, out typedefn))
             {
@@ -286,9 +249,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
-
-            //Changed this
+            // check if the variable is already in the stringhash
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
@@ -296,12 +257,9 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 VariableDefinition vardefn = new VariableDefinition();
                 vardefn.name = varname;
                 vardefn.vartype = typedefn as TypeDefinition;
@@ -311,12 +269,14 @@ namespace parser
        
         public override void OutAManyStatementsStatements(comp5210.node.AManyStatementsStatements node)
         {
+            // add state to the nodehash
             Definition state;
             nodehash.TryGetValue(node.GetStatement(), out state);
             nodehash.Add(node, state);
         }
         public override void OutAOneStatementStatements(comp5210.node.AOneStatementStatements node)
         {
+            // add state to the nodehash
             Definition state;
             nodehash.TryGetValue(node.GetStatement(), out state);
             nodehash.Add(node, state);
@@ -324,23 +284,23 @@ namespace parser
         
         public override void OutANumDeclareStatement(comp5210.node.ANumDeclareStatement node)
         {
+            // add numdecl to the nodehash
             Definition numdecl;
             nodehash.TryGetValue(node.GetNumDeclare(), out numdecl);
             nodehash.Add(node, numdecl);
         }
         public override void OutAAssignmentStatement(comp5210.node.AAssignmentStatement node)
         {
+            // add assign to the nodehash
             Definition assign;
             nodehash.TryGetValue(node.GetAssignment(), out assign);
             nodehash.Add(node, assign);
         } 
         public override void OutAVarDeclareStatement(comp5210.node.AVarDeclareStatement node)
-        {
-            
+        {            
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
-            Definition typedefn;
-            Definition stuff;
+            Definition typedefn, stuff;
             Console.WriteLine("Test "+ typename+" "+varname);
             // lookup the type
             if (!stringhash.TryGetValue(typename, out typedefn))
@@ -358,9 +318,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
-
-            //Changed this
+            // check if the variable is already in the stringhash
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
@@ -368,12 +326,9 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-
             else
             {
                 // add this variable to the hash table
-                // note you need to add checks to make sure this 
-                // variable name isn't already defined.
                 Console.WriteLine("good code");
                 VariableDefinition vardefn = new VariableDefinition();
                 vardefn.name = varname;
@@ -382,31 +337,34 @@ namespace parser
         }
         public override void OutAIfStatement(comp5210.node.AIfStatement node)
         {
+            // add ifstate to the nodehash
             Definition ifstate;
             nodehash.TryGetValue(node.GetIf(), out ifstate);
             nodehash.Add(node, ifstate);
         }
         public override void OutAWhileStatement(comp5210.node.AWhileStatement node)
         {
+            // add whilestate to the nodehash
             Definition whilestate;
             nodehash.TryGetValue(node.GetWhile(), out whilestate);
             nodehash.Add(node, whilestate);
         }
         public override void OutAMethodCallStatement(comp5210.node.AMethodCallStatement node)
         {
+            // add meth to the nodehash, not in our bodies. That stuff is illegal and not good for you
             Definition meth;
             nodehash.TryGetValue(node.GetMethodCall(), out meth);
             nodehash.Add(node, meth);
         }
 
         public override void OutAAssignExpressionAssignment(comp5210.node.AAssignExpressionAssignment node)
-        {
-            
+        {            
             string typename = node.GetVarName().Text;
             Definition rhs, lhs;
             nodehash.TryGetValue(node.GetExpressions(), out rhs);
             stringhash.TryGetValue(node.GetVarName().Text, out lhs);
             Console.WriteLine(lhs.name + " " + rhs.GetType().ToString());
+            // check if the type is in the stringhash
             if (!stringhash.TryGetValue(typename, out rhs))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
@@ -414,6 +372,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
+            // check if the types match
             else if (lhs.GetType() != rhs.GetType())
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
@@ -423,6 +382,7 @@ namespace parser
             }
             else
             {
+                // add assign expression assignment to the nodehash
                 nodehash.Add(node, rhs);
             }  
             
@@ -436,9 +396,7 @@ namespace parser
             nodehash.TryGetValue(node.GetInternalMath(), out inter);
             nodehash.TryGetValue(node.GetExternalMath(), out outer);
             stringhash.TryGetValue(node.GetVarName().Text, out name);
-            // make sure left hand side and right hand side match
-            // of course, you should really make sure left side is
-            // a variable first
+            // check if the type is in the stringhash
             if (!stringhash.TryGetValue(typename, out name))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
@@ -446,6 +404,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
+            // check if it is an integer
             else if (inttype != inter)
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
@@ -453,6 +412,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
+            // check if both sides have equal types
             else if ((name as VariableDefinition).vartype != outer)
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
@@ -462,6 +422,7 @@ namespace parser
             }
             else
             {
+                // add varddef to the nodehash
                 VariableDefinition varddef = new VariableDefinition();
                 varddef.vartype = name as TypeDefinition;
                 nodehash.Add(node, varddef);
@@ -503,6 +464,7 @@ namespace parser
             }
             else
             {
+                // add them to the string and node hash
                 stringhash.Add(varname, inttype);
                 nodehash.Add(node, inttype);
             }
@@ -541,6 +503,7 @@ namespace parser
             }
             else
             {
+                // adds them to the string and node hash
                 stringhash.Add(varname, flttype);
                 nodehash.Add(node, flttype);
             }
@@ -592,6 +555,7 @@ namespace parser
             Definition exprtype, booltype;
             stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out exprtype);
+            // checks if it is a booltype
             if (exprtype != booltype)
             {
                 Console.WriteLine("[" + node.GetIflit().Line + "]: " +
@@ -601,6 +565,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -611,6 +576,7 @@ namespace parser
 
             stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out exprtype);
+            // checks if it is a booltype
             if (exprtype != booltype)
             {
                 Console.WriteLine("[" + node.GetIflit().Line + "]: " +
@@ -620,6 +586,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -634,6 +601,7 @@ namespace parser
             Definition booltype, exprtype;
             stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out exprtype);
+            // checks if it is a booltype
             if (exprtype != booltype)
             {
                 Console.WriteLine("[" + node.GetWhilelit().Line + "]: " +
@@ -641,6 +609,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
+            // adds it to the nodehash
             else
             {
                 nodehash.Add(node, booltype);
@@ -653,7 +622,7 @@ namespace parser
             stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out lhs);
             nodehash.TryGetValue(node.GetLogicalCompare(), out rhs);
-            // make sure left hand side and right hand side match
+            // make sure left hand side and right hand side match and are booltype
             if (lhs != booltype || rhs != booltype)
             {
                 Console.WriteLine("[" + node.GetAnd().Line + "]: " +
@@ -663,6 +632,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -672,7 +642,7 @@ namespace parser
             stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out lhs);
             nodehash.TryGetValue(node.GetLogicalCompare(), out rhs);
-            // make sure left hand side and right hand side match
+            // make sure left hand side and right hand side match and are booltype
             if (lhs != booltype || rhs != booltype)
             {
                 Console.WriteLine("[" + node.GetOr().Line + "]: " +
@@ -682,11 +652,13 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
         public override void OutANoLogOpExpressions(comp5210.node.ANoLogOpExpressions node)
         {
+            // adds it to the nodehash
             Definition exprdefn;
             nodehash.TryGetValue(node.GetLogicalCompare(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -708,6 +680,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -727,6 +700,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -746,6 +720,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -765,6 +740,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
@@ -784,11 +760,13 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.Add(node, booltype);
             }
         }
         public override void OutANoLogCompareLogicalCompare(comp5210.node.ANoLogCompareLogicalCompare node)
         {
+            // adds it to the nodehash
             Definition exprdefn;
             nodehash.TryGetValue(node.GetAddSub(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -810,6 +788,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
                 nodehash.Add(node, exprdefn);
             }
@@ -830,12 +809,14 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
                 nodehash.Add(node, exprdefn);
             }
         }
         public override void OutANoMoreAddSubAddSub(comp5210.node.ANoMoreAddSubAddSub node)
         {
+            // adds it to the nodehash
             Definition exprdefn;
             nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -857,6 +838,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.TryGetValue(node.GetParenth(), out exprdefn);
                 nodehash.Add(node, exprdefn);
             }
@@ -877,12 +859,14 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 nodehash.TryGetValue(node.GetParenth(), out exprdefn);
                 nodehash.Add(node, exprdefn);
             }
         }
         public override void OutANoMoreDivMultiMultiDiv(comp5210.node.ANoMoreDivMultiMultiDiv node)
         {
+            // adds it to the nodehash
             Definition exprdefn;
             nodehash.TryGetValue(node.GetParenth(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -890,33 +874,31 @@ namespace parser
 		
         public override void OutAParenthParenth(comp5210.node.AParenthParenth node)
         {
+            // adds it to the nodehash
             Definition exprdefn;
             nodehash.TryGetValue(node.GetExpressions(), out exprdefn);
             nodehash.Add(node, exprdefn);
         }
         public override void OutAIntParenth(comp5210.node.AIntParenth node)
         {
+            // adds it to the nodehash
             Definition inttype;
             stringhash.TryGetValue("int", out inttype);
             nodehash.Add(node, inttype);
         }
         public override void OutAFloatParenth(comp5210.node.AFloatParenth node)
         {
+            // adds it to the nodehash
             Definition floattype;
             stringhash.TryGetValue("float", out floattype);
             nodehash.Add(node, floattype);
         }
         public override void OutAArrayParenth(comp5210.node.AArrayParenth node)
         {
-       
-
             string variable = node.GetId().Text;
-            Definition inttype;
-            Definition typedefn;
-            Definition rhs;
+            Definition inttype, typedefn, rhs;
             nodehash.TryGetValue(node.GetExpressions(), out rhs);
             stringhash.TryGetValue(node.GetId().Text, out inttype);
-
             // lookup the type
             if (!stringhash.TryGetValue(variable, out typedefn))
             {
@@ -933,7 +915,7 @@ namespace parser
                 ErrorDefinition errordef = new ErrorDefinition();
                 nodehash.Add(node, errordef);
             }
-            
+            // checks if rhs is an int            
             else if(rhs != inttype)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
@@ -943,6 +925,7 @@ namespace parser
             }
             else
             {
+                // adds it to the nodehash
                 Array total = new Array();
                 total.vartype = typedefn as TypeDefinition;
                 nodehash.Add(node, total);
@@ -970,7 +953,8 @@ namespace parser
                 nodehash.Add(node, errordef);
             }
             else
-            {                
+            {
+                // adds it to the nodehash      
                 nodehash.Add(node, (typedefn as VariableDefinition).vartype);
             }
         }
