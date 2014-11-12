@@ -63,14 +63,16 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 			
 			
@@ -79,7 +81,8 @@ namespace parser
 			{
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
 			}
 
             else
@@ -106,14 +109,16 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
 
@@ -122,7 +127,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
             else
@@ -150,7 +156,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
                     methodname + " is already defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
             else
@@ -176,7 +183,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
                     methodname + " is already defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
             else
@@ -202,7 +210,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
                     methodname + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
         }
@@ -219,14 +228,16 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetComma().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
 
@@ -235,7 +246,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetComma().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
             else
@@ -261,14 +273,16 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
 
@@ -277,7 +291,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
             else
@@ -330,14 +345,16 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
 
@@ -346,7 +363,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
 
             else
@@ -391,13 +409,15 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else if (lhs.GetType() != rhs.GetType())
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -423,19 +443,22 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else if (inttype != inter)
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
                     "index is not of type int");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else if ((name as VariableDefinition).vartype != outer)
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -460,21 +483,24 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     vartype + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // checks if it is an int
             else if (typedefn != inttype)
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     varname + " is the wrong type, int.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // checks if varname is already in table
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     varname + " is already defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -496,21 +522,24 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     vartype + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // checks if it is an int
             else if (typedefn != flttype)
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     varname + " is the wrong type, float.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // checks if varname is already in table
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     varname + " is already defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -530,21 +559,24 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // lookup the variable
             else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -568,7 +600,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetIflit().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -577,16 +610,17 @@ namespace parser
         }
         public override void OutAIfIf(comp5210.node.AIfIf node)
         {
-            BasicType booltype = new BasicType();
-            booltype.name = "boolean";
-
+            Definition booltype;
             Definition exprtype;
+
+            stringhash.TryGetValue("boolean", out booltype);
             nodehash.TryGetValue(node.GetExpressions(), out exprtype);
             if (exprtype != booltype)
             {
                 Console.WriteLine("[" + node.GetIflit().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -610,7 +644,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetWhilelit().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -631,7 +666,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetAnd().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -651,7 +687,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetOr().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -678,7 +715,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetGrtr().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -698,7 +736,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetLessthan().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -718,7 +757,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetGrtreqto().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -738,7 +778,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetLesseqto().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -758,7 +799,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetEqto().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -783,7 +825,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetPlus().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -802,7 +845,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetSub().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -828,7 +872,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMulti().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -847,7 +892,8 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetDiv().Line + "]: " +
                     "types don't match");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -870,46 +916,50 @@ namespace parser
         }
         public override void OutAIntParenth(comp5210.node.AIntParenth node)
         {
-            IntType inttype = new IntType();
-            inttype.name = "int";
+            Definition inttype;
+            stringhash.TryGetValue("int", out inttype);
             nodehash.Add(node, inttype);
         }
         public override void OutAFloatParenth(comp5210.node.AFloatParenth node)
         {
-            FloatType flttype = new FloatType();
-            flttype.name = "float";
-            nodehash.Add(node, flttype);
+            Definition floattype;
+            stringhash.TryGetValue("float", out floattype);
+            nodehash.Add(node, floattype);
         }
         public override void OutAArrayParenth(comp5210.node.AArrayParenth node)
         {
-            BasicType inttype = new BasicType();
-            inttype.name = "int";
+       
 
             string variable = node.GetId().Text;
+            Definition inttype;
             Definition typedefn;
             Definition rhs;
             nodehash.TryGetValue(node.GetExpressions(), out rhs);
+            stringhash.TryGetValue(node.GetId().Text, out inttype);
 
             // lookup the type
             if (!stringhash.TryGetValue(variable, out typedefn))
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is not a type
             else if (typedefn is TypeDefinition)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is an invalid type.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             
             else if(rhs != inttype)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     node.GetExpressions() + " is an invalid index.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {
@@ -928,20 +978,20 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is not defined.");
-                nodehash.Add(node, null);
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             // check to make sure what we got back is not a type
-            else if (typedefn is TypeDefinition)
+            else if (!(typedefn is VariableDefinition))
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
-                    variable + " is an invalid type.");
-                nodehash.Add(node, null);
+                    variable + " is not a variable.");
+                ErrorDefinition errordef = new ErrorDefinition();
+                nodehash.Add(node, errordef);
             }
             else
             {                
-                VariableDefinition vardefn = new VariableDefinition();
-                vardefn.vartype = typedefn as TypeDefinition;
-                nodehash.Add(node, vardefn);
+                nodehash.Add(node, (typedefn as VariableDefinition).vartype);
             }
         }
     }

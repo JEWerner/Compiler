@@ -1,259 +1,39 @@
 ' 
 "---------------------Test file 1--------------------------" 
+test int const
+test int const
+[20]: output is not defined.
+Test int tempVar
+good code
+[22]: types don't match
+[22]: types don't match
+[22]: types don't match
 ' 
 "---------------------Test file 2--------------------------" 
 ' 
-
-- AProgram
-     `- AManyConstants
-     |  |- AManyConstants
-     |  |  |- ANothingConstants
-     |  |  `- AIntdeclConstDeclare
-     |  |     |- constant
-     |  |     |- int
-     |  |     |- test
-     |  |     |- =
-     |  |     |- 0
-     |  |     `- ;
-     |  `- AFloatdeclConstDeclare
-     |     |- constant
-     |     |- float
-     |     |- try
-     |     |- =
-     |     |- 3.4
-     |     `- ;
-     `- AManyMethodsMethods
-        |- ANothingMethods
-        `- AMethod
-           |- func
-           |- test
-           |- (
-           |- )
-           `- {
-           |- AManyStatementsStatements
-           |  |- ANoMoreStatementsStatements
-           |  `- AIfStatement
-           |     `- AIf
-           |        |- if 
-           |        |- AIdCondition
-           |        |  `- one
-           |        |- AEqualToLogicalExpressions
-           |        |  `- ==
-           |        |- AIntCondition
-           |        |  `- 2
-           |        `- {
-           |        |- AManyStatementsStatements
-           |        |  |- ANoMoreStatementsStatements
-           |        |  `- AAssignmentStatement
-           |        |     `- AAssignFloatAssignment
-           |        |        |- three
-           |        |        |- =
-           |        |        |- 0.5
-           |        |        `- ;
-           |        |- }
-           |        |- ;
-           |        |- AElseElsepart
-           |        |  |- else
-           |        |  `- {
-           |        |  |- AManyStatementsStatements
-           |        |  |  |- ANoMoreStatementsStatements
-           |        |  |  `- AAssignmentStatement
-           |        |  |     `- AAssignIntAssignment
-           |        |  |        |- two
-           |        |  |        |- =
-           |        |  |        |- 4
-           |        |  |        `- ;
-           |        |  `- }
-           |        `- ;
-           |- }
-           `- ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Test int x
+good code
+x parser.IntType
 ' 
 "----------------------Test file 3-------------------------" 
 ' 
-
-- AProgram
-     `- ANothingConstants
-     `- AManyMethodsMethods
-        |- ANothingMethods
-        `- AMethod
-           |- func
-           |- test
-           |- (
-           |- )
-           `- {
-           |- AManyStatementsStatements
-           |  |- AManyStatementsStatements
-           |  |  |- ANoMoreStatementsStatements
-           |  |  `- AAssignmentStatement
-           |  |     `- AAssignIntAssignment
-           |  |        |- rand
-           |  |        |- =
-           |  |        |- 4
-           |  |        `- ;
-           |  `- AWhileStatement
-           |     `- AWhile
-           |        |- while
-           |        |- AIdCondition
-           |        |  `- two
-           |        |- ALessThanLogicalExpressions
-           |        |  `- <
-           |        |- AIdCondition
-           |        |  `- three
-           |        `- {
-           |        |- AManyStatementsStatements
-           |        |  |- ANoMoreStatementsStatements
-           |        |  `- AMathExpressionStatement
-           |        |     `- AMath
-           |        |        |- three
-           |        |        |- =
-           |        |        |- AIdCondition
-           |        |        |  `- three
-           |        |        |- APlusMathOperation
-           |        |        |  `- +
-           |        |        |- four
-           |        |        `- ;
-           |        `- }
-           |- }
-           `- ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ' 
 "----------------------Test file 4-------------------------" 
 ' 
-
-- AProgram
-     `- ANothingConstants
-     `- AManyMethodsMethods
-        |- AManyMethodsMethods
-        |  |- ANothingMethods
-        |  `- AMethod
-        |     |- func
-        |     |- main
-        |     |- (
-        |     |- )
-        |     `- {
-        |     |- ANoMoreStatementsStatements
-        |     |- }
-        |     `- ;
-        `- AMethod
-           |- func
-           |- second
-           |- (
-           |- )
-           `- {
-           |- AManyStatementsStatements
-           |  |- ANoMoreStatementsStatements
-           |  `- ANumDeclareStatement
-           |     `- AIntdeclNumDeclare
-           |        |- int
-           |        |- index
-           |        |- =
-           |        |- 9
-           |        `- ;
-           |- }
-           `- ;
-
-
-
-
-
-
-
-
-
-
-
-
-
+Test int test
+good code
+test parser.IntType
+Test int index
+good code
+index parser.IntType
+Test int one
+good code
+[12]: types don't match
 ' 
 "----------------------Test file 5-------------------------" 
 ' 
-
-- AProgram
-     `- ANothingConstants
-     `- AManyMethodsMethods
-        |- ANothingMethods
-        `- AMethod
-           |- func
-           |- second
-           |- (
-           |- )
-           `- {
-           |- AManyStatementsStatements
-           |  |- AManyStatementsStatements
-           |  |  |- ANoMoreStatementsStatements
-           |  |  `- ANumDeclareStatement
-           |  |     `- AIntdeclNumDeclare
-           |  |        |- int
-           |  |        |- index
-           |  |        |- =
-           |  |        |- 9
-           |  |        `- ;
-           |  `- AMethodCallStatement
-           |     `- AMethodCall
-           |        |- innerFunc
-           |        |- (
-           |        |- )
-           |        `- ;
-           |- }
-           `- ;
-
-
-
-
-
-
-
-
-
-
-
-
-
+test int const
+test int const
+Test int test
+good code
 ' 

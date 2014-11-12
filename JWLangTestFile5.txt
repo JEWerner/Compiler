@@ -1,5 +1,15 @@
-constant int x = 2;
-constant float y = 2;
+
 func main(){
-int test;
+
+int x;
+int y;
+int x;
+
+y z;
+blue z;
+
+x = y;
+y=z;
+
+x = x + 1.0;
 };

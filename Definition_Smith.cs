@@ -46,4 +46,12 @@ namespace parser
             public class MethodDefinition : SubprogramDefinition
             {
             }
+            public class ErrorDefinition : Definition
+            {
+                public ErrorDefinition()
+                {
+                    name = "error";
+                }
+
+            }
 }

@@ -1,6 +1,7 @@
 constant int constanttest = 4;
 constant y x = 0;
 
+
 func test(){
 int booltest;
 int xtest;
@@ -9,37 +10,77 @@ float xfloat;
 int xint;
 xint = 5;
 int arraywork[4];
-
-
-
 y x;
 
-int array = new array[10.5];
+int array [10];
 int array;
-if(booltest){}
-while(booltest){}
-while(int){}
-while(undeclared){}
-while(array2[0] = array2[0]){}
-while(int[0] = int[0]){}
-while(array[4.4] = array[4.4]){}
+
+
+	
+while(booltest)
+	{
+	int test2;
+	};
+while(int)
+	{
+	int test3;
+	};
+while(undeclared)
+	{
+	int test4;
+	};
+while(array2[0] == array2[0])
+	{
+	int test5;
+	};
+while(int[0] == int[0])
+	{
+	int test6;
+	};
+while(array[4.4] == array[4.4])
+	{
+	int test7;
+	};
 xtest = 3 + 3.3;
-xtest = (3 = 3) + (2 = 3);
-while((3 = 3) and 4){}
-while(4 and 4){}
-while((3 = 3) < 4){}
-while(4 < 4){}
+xtest = (3 == 3) + (2 == 3);
+while((3 == 3) AND 4)
+	{
+	int test8;
+	};
+while(4 AND 4)
+	{
+	int test9;
+	};
+while((3 == 3) < 4)
+	{
+	int test10;
+	};
+while(4 < 4)
+	{
+	int test11;
+	};
 undeclared = xtest;
 int = xtest;
-constant = 5;
+
 xfloat = xint;
 undeclared[4] = 4;
 int[4] = 4;
-int arraynotwork[4.4];
+int arraynotwork[4];
 arraywork[4] = 4.4;
-func function(int x, float y){}
-func function2(int x, int x){}
+
 function3(xint, xfloat);
 xtest(xint, xfloat);
-function(float xfloat; int xint){};
-}
+
+};
+func name(float xfloat, int xint)
+	{
+	int test11;
+	};
+func function(int x, float y)
+	{
+	int test12;
+	};
+func function2(int x, int x)
+	{
+	int test13;
+	};
