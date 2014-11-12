@@ -439,6 +439,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetAnd().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -455,6 +456,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetOr().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -478,6 +480,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetGrtr().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -494,6 +497,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetLessthan().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -510,6 +514,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetGrtreqto().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -526,6 +531,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetLesseqto().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -542,6 +548,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetEqto().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.Add(node, booltype);
         }
@@ -563,6 +570,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetPlus().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -578,6 +586,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetSub().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -600,6 +609,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMulti().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.TryGetValue(node.GetParenth(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -615,6 +625,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetDiv().Line + "]: " +
                     "types don't match");
+                nodehash.Add(node, null);
             }
             nodehash.TryGetValue(node.GetParenth(), out exprdefn);
             nodehash.Add(node, exprdefn);
@@ -658,18 +669,21 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is not defined.");
+                nodehash.Add(node, null);
             }
             // check to make sure what we got back is not a type
             else if (typedefn is TypeDefinition)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is an invalid type.");
+                nodehash.Add(node, null);
             }
             
             else if(rhs != inttype)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     node.GetExpressions() + " is an invalid index.");
+                nodehash.Add(node, null);
             }
             else
             {
@@ -688,12 +702,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is not defined.");
+                nodehash.Add(node, null);
             }
             // check to make sure what we got back is not a type
             else if (typedefn is TypeDefinition)
             {
                 Console.WriteLine("[" + node.GetId().Line + "]: " +
                     variable + " is an invalid type.");
+                nodehash.Add(node, null);
             }
             else
             {                
