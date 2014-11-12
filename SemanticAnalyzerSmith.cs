@@ -263,19 +263,19 @@ namespace parser
 
         public override void OutAAssignExpressionAssignment(comp5210.node.AAssignExpressionAssignment node)
         {
-        }	
+        }
 
-        public override void OutAArray_assignAssignment(comp5210.node.AArrayAssignAssignment node)
-        {
-        }	
-			
-        public override void OutAIntdeclNum_declare(comp5210.node.AIntdeclNumDeclare node)
+        public override void OutAArrayAssignAssignment(comp5210.node.AArrayAssignAssignment node)
         {
         }
-        public override void OutAFloatdeclNum_declare(comp5210.node.AFloatdeclNumDeclare node)
+
+        public override void OutAIntdeclNumDeclare(comp5210.node.AIntdeclNumDeclare node)
         {
         }
-        public override void OutAArray_indexNum_declare(comp5210.node.AArrayIndexNumDeclare node)
+        public override void OutAFloatdeclNumDeclare(comp5210.node.AFloatdeclNumDeclare node)
+        {
+        }
+        public override void OutAArrayIndexNumDeclare(comp5210.node.AArrayIndexNumDeclare node)
         {
         }
 		
@@ -285,7 +285,7 @@ namespace parser
         public override void OutAIfElseIf(comp5210.node.AIfElseIf node)
         {
         }
-        public override void OutAIf_If(comp5210.node.AIfIf node)
+        public override void OutAIfIf(comp5210.node.AIfIf node)
         {
         }
         public override void OutAWhile(comp5210.node.AWhile node)
@@ -298,46 +298,46 @@ namespace parser
         public override void OutAOrExpressions(comp5210.node.AOrExpressions node)
         {
         }
-        public override void OutANo_log_opExpressions(comp5210.node.ANoLogOpExpressions node)
+        public override void OutANoLogOpExpressions(comp5210.node.ANoLogOpExpressions node)
         {
         }
-		
-        public override void OutAGreaterLogical_compare(comp5210.node.AGreaterLogicalCompare node)
+
+        public override void OutAGreaterLogicalCompare(comp5210.node.AGreaterLogicalCompare node)
         {
         }
-        public override void OutALess_thanLogical_compare(comp5210.node.ALessThanLogicalCompare node)
+        public override void OutALessThanLogicalCompare(comp5210.node.ALessThanLogicalCompare node)
         {
         }
-        public override void OutAGreater_than_equal_toLogical_compare(comp5210.node.AGreaterThanEqualToLogicalCompare node)
+        public override void OutAGreaterThanEqualToLogicalCompare(comp5210.node.AGreaterThanEqualToLogicalCompare node)
         {
         }
-        public override void OutALess_than_equal_toLogical_compare(comp5210.node.ALessThanEqualToLogicalCompare node)
+        public override void OutALessThanEqualToLogicalCompare(comp5210.node.ALessThanEqualToLogicalCompare node)
         {
         }
-        public override void OutAEqual_toLogical_compare(comp5210.node.AEqualToLogicalCompare node)
+        public override void OutAEqualToLogicalCompare(comp5210.node.AEqualToLogicalCompare node)
         {
         }
-        public override void OutANo_log_compareLogical_compare(comp5210.node.ANoLogCompareLogicalCompare node)
+        public override void OutANoLogCompareLogicalCompare(comp5210.node.ANoLogCompareLogicalCompare node)
         {
         }
-		
-        public override void OutAAddAdd_sub(comp5210.node.AAddAddSub node)
+
+        public override void OutAAddAddSub(comp5210.node.AAddAddSub node)
         {
         }
-        public override void OutASubtractAdd_sub(comp5210.node.ASubtractAddSub node)
+        public override void OutASubtractAddSub(comp5210.node.ASubtractAddSub node)
         {
         }
-        public override void OutANo_more_add_subAdd_sub(comp5210.node.ANoMoreAddSubAddSub node)
+        public override void OutANoMoreAddSubAddSub(comp5210.node.ANoMoreAddSubAddSub node)
         {
         }
-		
-        public override void OutAMultiplyMulti_div(comp5210.node.AMultiplyMultiDiv node)
+
+        public override void OutAMultiplyMultiDiv(comp5210.node.AMultiplyMultiDiv node)
         {
         }
-        public override void OutADivideMulti_div(comp5210.node.ADivideMultiDiv node)
+        public override void OutADivideMultiDiv(comp5210.node.ADivideMultiDiv node)
         {
         }
-        public override void OutANo_more_div_multiMulti_div(comp5210.node.ANoMoreDivMultiMultiDiv node)
+        public override void OutANoMoreDivMultiMultiDiv(comp5210.node.ANoMoreDivMultiMultiDiv node)
         {
         }
 		
