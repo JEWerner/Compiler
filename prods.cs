@@ -3794,9 +3794,9 @@ public sealed class AAssignExpressionAssignment : PAssignment
 public sealed class AArrayAssignAssignment : PAssignment
 {
     private TId _var_name_;
-    private TOpenbracket _start_ob_;
+    private TOpenbracket _openbracket_;
     private PExpressions _internal_math_;
-    private TClosedbracket _start_cb_;
+    private TClosedbracket _closedbracket_;
     private TEqual _equal_;
     private PExpressions _external_math_;
     private TSemicolon _semicolon_;
@@ -3807,18 +3807,18 @@ public sealed class AArrayAssignAssignment : PAssignment
 
     public AArrayAssignAssignment (
             TId _var_name_,
-            TOpenbracket _start_ob_,
+            TOpenbracket _openbracket_,
             PExpressions _internal_math_,
-            TClosedbracket _start_cb_,
+            TClosedbracket _closedbracket_,
             TEqual _equal_,
             PExpressions _external_math_,
             TSemicolon _semicolon_
     )
     {
         SetVarName (_var_name_);
-        SetStartOb (_start_ob_);
+        SetOpenbracket (_openbracket_);
         SetInternalMath (_internal_math_);
-        SetStartCb (_start_cb_);
+        SetClosedbracket (_closedbracket_);
         SetEqual (_equal_);
         SetExternalMath (_external_math_);
         SetSemicolon (_semicolon_);
@@ -3828,9 +3828,9 @@ public sealed class AArrayAssignAssignment : PAssignment
     {
         return new AArrayAssignAssignment (
             (TId)CloneNode (_var_name_),
-            (TOpenbracket)CloneNode (_start_ob_),
+            (TOpenbracket)CloneNode (_openbracket_),
             (PExpressions)CloneNode (_internal_math_),
-            (TClosedbracket)CloneNode (_start_cb_),
+            (TClosedbracket)CloneNode (_closedbracket_),
             (TEqual)CloneNode (_equal_),
             (PExpressions)CloneNode (_external_math_),
             (TSemicolon)CloneNode (_semicolon_)
@@ -3866,16 +3866,16 @@ public sealed class AArrayAssignAssignment : PAssignment
 
         _var_name_ = node;
     }
-    public TOpenbracket GetStartOb ()
+    public TOpenbracket GetOpenbracket ()
     {
-        return _start_ob_;
+        return _openbracket_;
     }
 
-    public void SetStartOb (TOpenbracket node)
+    public void SetOpenbracket (TOpenbracket node)
     {
-        if(_start_ob_ != null)
+        if(_openbracket_ != null)
         {
-            _start_ob_.Parent(null);
+            _openbracket_.Parent(null);
         }
 
         if(node != null)
@@ -3888,7 +3888,7 @@ public sealed class AArrayAssignAssignment : PAssignment
             node.Parent(this);
         }
 
-        _start_ob_ = node;
+        _openbracket_ = node;
     }
     public PExpressions GetInternalMath ()
     {
@@ -3914,16 +3914,16 @@ public sealed class AArrayAssignAssignment : PAssignment
 
         _internal_math_ = node;
     }
-    public TClosedbracket GetStartCb ()
+    public TClosedbracket GetClosedbracket ()
     {
-        return _start_cb_;
+        return _closedbracket_;
     }
 
-    public void SetStartCb (TClosedbracket node)
+    public void SetClosedbracket (TClosedbracket node)
     {
-        if(_start_cb_ != null)
+        if(_closedbracket_ != null)
         {
-            _start_cb_.Parent(null);
+            _closedbracket_.Parent(null);
         }
 
         if(node != null)
@@ -3936,7 +3936,7 @@ public sealed class AArrayAssignAssignment : PAssignment
             node.Parent(this);
         }
 
-        _start_cb_ = node;
+        _closedbracket_ = node;
     }
     public TEqual GetEqual ()
     {
@@ -4015,9 +4015,9 @@ public sealed class AArrayAssignAssignment : PAssignment
     {
         return ""
             + ToString (_var_name_)
-            + ToString (_start_ob_)
+            + ToString (_openbracket_)
             + ToString (_internal_math_)
-            + ToString (_start_cb_)
+            + ToString (_closedbracket_)
             + ToString (_equal_)
             + ToString (_external_math_)
             + ToString (_semicolon_)
@@ -4031,9 +4031,9 @@ public sealed class AArrayAssignAssignment : PAssignment
             _var_name_ = null;
             return;
         }
-        if ( _start_ob_ == child )
+        if ( _openbracket_ == child )
         {
-            _start_ob_ = null;
+            _openbracket_ = null;
             return;
         }
         if ( _internal_math_ == child )
@@ -4041,9 +4041,9 @@ public sealed class AArrayAssignAssignment : PAssignment
             _internal_math_ = null;
             return;
         }
-        if ( _start_cb_ == child )
+        if ( _closedbracket_ == child )
         {
-            _start_cb_ = null;
+            _closedbracket_ = null;
             return;
         }
         if ( _equal_ == child )
@@ -4070,9 +4070,9 @@ public sealed class AArrayAssignAssignment : PAssignment
             SetVarName ((TId) newChild);
             return;
         }
-        if ( _start_ob_ == oldChild )
+        if ( _openbracket_ == oldChild )
         {
-            SetStartOb ((TOpenbracket) newChild);
+            SetOpenbracket ((TOpenbracket) newChild);
             return;
         }
         if ( _internal_math_ == oldChild )
@@ -4080,9 +4080,9 @@ public sealed class AArrayAssignAssignment : PAssignment
             SetInternalMath ((PExpressions) newChild);
             return;
         }
-        if ( _start_cb_ == oldChild )
+        if ( _closedbracket_ == oldChild )
         {
-            SetStartCb ((TClosedbracket) newChild);
+            SetClosedbracket ((TClosedbracket) newChild);
             return;
         }
         if ( _equal_ == oldChild )

@@ -1235,17 +1235,17 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetVarName().Apply(this);
         }
-        if(node.GetStartOb() != null)
+        if(node.GetOpenbracket() != null)
         {
-            node.GetStartOb().Apply(this);
+            node.GetOpenbracket().Apply(this);
         }
         if(node.GetInternalMath() != null)
         {
             node.GetInternalMath().Apply(this);
         }
-        if(node.GetStartCb() != null)
+        if(node.GetClosedbracket() != null)
         {
-            node.GetStartCb().Apply(this);
+            node.GetClosedbracket().Apply(this);
         }
         if(node.GetEqual() != null)
         {
@@ -2725,17 +2725,17 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetEqual().Apply(this);
         }
-        if(node.GetStartCb() != null)
+        if(node.GetClosedbracket() != null)
         {
-            node.GetStartCb().Apply(this);
+            node.GetClosedbracket().Apply(this);
         }
         if(node.GetInternalMath() != null)
         {
             node.GetInternalMath().Apply(this);
         }
-        if(node.GetStartOb() != null)
+        if(node.GetOpenbracket() != null)
         {
-            node.GetStartOb().Apply(this);
+            node.GetOpenbracket().Apply(this);
         }
         if(node.GetVarName() != null)
         {
