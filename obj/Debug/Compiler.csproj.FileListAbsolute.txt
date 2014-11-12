@@ -14,3 +14,6 @@ C:\Users\C15Jake.Werner\Documents\GitHub\Compiler\bin\Debug\Compiler.exe.config
 C:\Users\C15Jake.Werner\Documents\GitHub\Compiler\obj\Debug\Compiler.exe
 C:\Users\C15Jake.Werner\Documents\GitHub\Compiler\obj\Debug\Compiler.pdb
 C:\Users\C15Jake.Werner\Documents\GitHub\Compiler\obj\Debug\Compiler.csprojResolveAssemblyReference.cache
+C:\Users\C15Cameron.Smith\Documents\GitHub\Compiler\bin\Debug\Compiler.exe.config
+C:\Users\C15Cameron.Smith\Documents\GitHub\Compiler\obj\Debug\Compiler.exe
+C:\Users\C15Cameron.Smith\Documents\GitHub\Compiler\obj\Debug\Compiler.pdb
