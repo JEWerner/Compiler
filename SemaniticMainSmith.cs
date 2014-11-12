@@ -127,7 +127,7 @@ class semanticmain
 {
   public static void Main(String[] args)
   {
-      TextReader tr = new StreamReader(args[0]);
+    TextReader tr = new StreamReader(args[0]);
     Lexer l = new Lexer(tr);
     Parser p = new Parser (l);
     Start s = p.Parse ();

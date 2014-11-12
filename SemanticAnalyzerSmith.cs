@@ -43,12 +43,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
+                nodehash.Add(node, typedefn);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
+                nodehash.Add(node, typedefn);
             }
 			
 			
@@ -57,6 +59,7 @@ namespace parser
 			{
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
+                nodehash.Add(node, typedefn);
 			}
 
             else
@@ -82,12 +85,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
+                nodehash.Add(node, typedefn);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     typename + " is an invalid type.");
+                nodehash.Add(node, typedefn);
             }
 
 
@@ -96,6 +101,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
                     varname + " is already declared.");
+                nodehash.Add(node, typedefn);
             }
 
             else
@@ -108,9 +114,7 @@ namespace parser
                 vardefn.vartype = typedefn as TypeDefinition;
                 stringhash.Add(vardefn.name, vardefn);
             }
-        }
-		
-		
+        }	
         public override void OutAWithParamMethod(comp5210.node.AWithParamMethod node)
         {
             
@@ -124,6 +128,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
                     methodname + " is already defined.");
+                nodehash.Add(node, typedefn);
             }
 
             else
@@ -149,6 +154,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
                     methodname + " is already defined.");
+                nodehash.Add(node, typedefn);
             }
 
             else
@@ -174,6 +180,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
                     methodname + " is not defined.");
+                nodehash.Add(node, typedefn);
             }
 
         }
@@ -190,12 +197,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
+                nodehash.Add(node, typedefn);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetComma().Line + "]: " +
                     typename + " is an invalid type.");
+                nodehash.Add(node, typedefn);
             }
 
 
@@ -204,6 +213,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetComma().Line + "]: " +
                     varname + " is already declared.");
+                nodehash.Add(node, typedefn);
             }
 
             else
@@ -229,12 +239,14 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     typename + " is not defined.");
+                nodehash.Add(node, typedefn);
             }
             // check to make sure what we got back is a type
             else if (!(typedefn is TypeDefinition))
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     typename + " is an invalid type.");
+                nodehash.Add(node, typedefn);
             }
 
 
@@ -243,6 +255,7 @@ namespace parser
             {
                 Console.WriteLine("[" + node.GetVarName().Line + "]: " +
                     varname + " is already declared.");
+                nodehash.Add(node, typedefn);
             }
 
             else
@@ -259,10 +272,69 @@ namespace parser
 
         public override void OutAVarDeclareStatement(comp5210.node.AVarDeclareStatement node)
         {
+            string typename = node.GetVarType().Text;
+            string varname = node.GetVarName().Text;
+            Definition typedefn;
+            Definition stuff;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(typename, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    typename + " is not defined.");
+                nodehash.Add(node, typedefn);
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetVarName().Line + "]: " +
+                    typename + " is an invalid type.");
+                nodehash.Add(node, typedefn);
+            }
+
+
+            //Changed this
+            else if (stringhash.TryGetValue(varname, out stuff))
+            {
+                Console.WriteLine("[" + node.GetVarName().Line + "]: " +
+                    varname + " is already declared.");
+                nodehash.Add(node, typedefn);
+            }
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
         }
 
         public override void OutAAssignExpressionAssignment(comp5210.node.AAssignExpressionAssignment node)
         {
+            string typename = node.GetVarName().Text;
+            Definition rhs, lhs;
+            nodehash.TryGetValue(node.GetExpressions(), out rhs);
+            stringhash.TryGetValue(node.GetVarName().Text, out lhs);
+            // make sure left hand side and right hand side match
+            // of course, you should really make sure left side is
+            // a variable first
+            if (!stringhash.TryGetValue(typename, out rhs))
+            {
+                Console.WriteLine("[" + node.GetVarName().Line + "]: " +
+                    typename + " is not defined.");
+                nodehash.Add(node, lhs);
+            }
+            else if ((lhs as VariableDefinition).vartype != rhs)
+            {
+                Console.WriteLine("[" + node.GetEqual().Line + "]: " +
+                    "types don't match");
+                nodehash.Add(node, rhs);
+            }               
+            
         }
 
         public override void OutAArrayAssignAssignment(comp5210.node.AArrayAssignAssignment node)
