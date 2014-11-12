@@ -23,6 +23,8 @@ namespace parser
             stringtype.name = "string";
             BooleanType booltype = new BooleanType();
             booltype.name = "boolean";
+            ErrorType errortype = new ErrorType();
+            booltype.name = "boolean";
 
             stringhash.Add(booltype.name, booltype);
             stringhash.Add(stringtype.name, stringtype);

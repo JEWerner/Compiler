@@ -27,6 +27,9 @@ namespace parser
                 public class BooleanType : BasicType
                 {
                 }
+                public class ErrorType : BasicType
+                {
+                }
             public class Array : TypeDefinition
             {
                 public TypeDefinition vartype;

@@ -121,7 +121,7 @@ Productions
 	// ----------If/Else/While--------------
 	if = 
 		{if_else} iflit expressions opencurl statements  closecurl semicolon elsepart|
-		{if} iflit expressions opencurl statements  closecurl semicolon;	
+		{if} iflit expressions opencurl statements  closecurl semicolon;
 	
 	elsepart = 
 		{else} else opencurl statements closecurl semicolon;
