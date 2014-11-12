@@ -866,13 +866,13 @@ namespace parser
         }
         public override void OutAIntParenth(comp5210.node.AIntParenth node)
         {
-            BasicType inttype = new BasicType();
+            IntType inttype = new IntType();
             inttype.name = "int";
             nodehash.Add(node, inttype);
         }
         public override void OutAFloatParenth(comp5210.node.AFloatParenth node)
         {
-            BasicType flttype = new BasicType();
+            FloatType flttype = new FloatType();
             flttype.name = "float";
             nodehash.Add(node, flttype);
         }
@@ -880,6 +880,7 @@ namespace parser
         {
             BasicType inttype = new BasicType();
             inttype.name = "int";
+
             string variable = node.GetId().Text;
             Definition typedefn;
             Definition rhs;
