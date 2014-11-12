@@ -29,9 +29,9 @@ namespace parser
             stringhash.Add(inttype.name, inttype);
             stringhash.Add(flttype.name, flttype);
         }
-		
 
-        public override void OutAIntdeclConst_declare(comp5210.node.AIntdeclConstDeclare node)
+
+        public override void OutAIntdeclConstDeclare(comp5210.node.AIntdeclConstDeclare node)
         {
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
@@ -70,7 +70,7 @@ namespace parser
                 stringhash.Add(vardefn.name, vardefn);
             }
         }
-        public override void OutAFloatdeclConst_declare(comp5210.node.AFloatdeclConstDeclare node)
+        public override void OutAFloatdeclConstDeclare(comp5210.node.AFloatdeclConstDeclare node)
         {
             string typename = node.GetVarType().Text;
             string varname = node.GetVarName().Text;
@@ -160,60 +160,111 @@ namespace parser
                 methdefn.name = methodname;
                 stringhash.Add(methdefn.name, methdefn);
             }
-        }		
-        public override void OutAMethod_call(comp5210.node.AMethodCall node)
+        }
+        public override void OutAMethodCall(comp5210.node.AMethodCall node)
+        {
+
+            string methodname = node.GetMethodName().Text;
+
+            Definition typedefn;
+
+
+            // lookup the method name to ensure it exists
+            if (!stringhash.TryGetValue(methodname, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetMethodName().Line + "]: " +
+                    methodname + " is not defined.");
+            }
+
+        }
+
+        public override void OutAManyParametersFormalParameters(comp5210.node.AManyParametersFormalParameters node)
+        {
+            string typename = node.GetVarType().Text;
+            string varname = node.GetVarName().Text;
+            Definition typedefn;
+            Definition stuff;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(typename, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    typename + " is not defined.");
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetComma().Line + "]: " +
+                    typename + " is an invalid type.");
+            }
+
+
+            //Changed this
+            else if (stringhash.TryGetValue(varname, out stuff))
+            {
+                Console.WriteLine("[" + node.GetComma().Line + "]: " +
+                    varname + " is already declared.");
+            }
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
+        }
+        public override void OutAFinalParameterFormalParameters(comp5210.node.AFinalParameterFormalParameters node)
+        {
+            string typename = node.GetVarType().Text;
+            string varname = node.GetVarName().Text;
+            Definition typedefn;
+            Definition stuff;
+
+            // lookup the type
+            if (!stringhash.TryGetValue(typename, out typedefn))
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    typename + " is not defined.");
+            }
+            // check to make sure what we got back is a type
+            else if (!(typedefn is TypeDefinition))
+            {
+                Console.WriteLine("[" + node.GetVarName().Line + "]: " +
+                    typename + " is an invalid type.");
+            }
+
+
+            //Changed this
+            else if (stringhash.TryGetValue(varname, out stuff))
+            {
+                Console.WriteLine("[" + node.GetVarName().Line + "]: " +
+                    varname + " is already declared.");
+            }
+
+            else
+            {
+                // add this variable to the hash table
+                // note you need to add checks to make sure this 
+                // variable name isn't already defined.
+                VariableDefinition vardefn = new VariableDefinition();
+                vardefn.name = varname;
+                vardefn.vartype = typedefn as TypeDefinition;
+                stringhash.Add(vardefn.name, vardefn);
+            }
+        }
+
+        public override void OutAVarDeclareStatement(comp5210.node.AVarDeclareStatement node)
         {
         }
-		
-        public override void OutAString_paramActual_parameters(comp5210.node.AStringParamActualParameters node)
-        {
-        }
-        public override void OutAExpression_paramActualParameters(comp5210.node.AExpressionParamActualParameters node)
-        {
-        }
-        public override void OutAString_param_lastActual_parameters(comp5210.node.ALastParamStringActualParameters node)
-        {
-        }
-        public override void OutAExpression_last_Actual_parameters(comp5210.node.ALastParamExpressionActualParameters node)
-        {
-        }
-		
-        public override void OutAMany_parametersFormal_parameters(comp5210.node.AManyParametersFormalParameters node)
-        {
-        }
-        public override void OutAFinal_parametersFormal_parameters(comp5210.node.AFinalParameterFormalParameters node)
-        {
-        }
-		
-        public override void OutAMany_statementsStatements(comp5210.node.AManyStatementsStatements node)
-        {
-        }
-        public override void OutAFinal_Formal_parameters(comp5210.node.AFinalParameterFormalParameters node)
-        {
-        }		
-		
-        public override void OutAAssignmentStatement(comp5210.node.AAssignmentStatement node)
-        {
-        }
-        public override void OutANum_declareStatement(comp5210.node.ANumDeclareStatement node)
+
+        public override void OutAAssignExpressionAssignment(comp5210.node.AAssignExpressionAssignment node)
         {
         }	
-        public override void OutAMethod_callStatement(comp5210.node.AMethodCallStatement node)
-        {
-        }
-        public override void OutAIfStatement(comp5210.node.AIfStatement node)
-        {
-        }	
-        public override void OutAWhileStatement(comp5210.node.AWhileStatement node)
-        {
-        }
-		
-        public override void OutAAssignExpression(comp5210.node.AAssignExpressionAssignment node)
-        {
-        }	
-        public override void OutAVar_DeclareAssignment(comp5210.node.AVarDeclareStatement node)
-        {
-        }
+
         public override void OutAArray_assignAssignment(comp5210.node.AArrayAssignAssignment node)
         {
         }	

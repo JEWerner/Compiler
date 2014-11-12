@@ -1200,9 +1200,9 @@ public class DepthFirstAdapter : AnalysisAdapter
     public override void CaseAAssignExpressionAssignment(AAssignExpressionAssignment node)
     {
         InAAssignExpressionAssignment(node);
-        if(node.GetIntName() != null)
+        if(node.GetVarName() != null)
         {
-            node.GetIntName().Apply(this);
+            node.GetVarName().Apply(this);
         }
         if(node.GetEqual() != null)
         {
@@ -2694,9 +2694,9 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetEqual().Apply(this);
         }
-        if(node.GetIntName() != null)
+        if(node.GetVarName() != null)
         {
-            node.GetIntName().Apply(this);
+            node.GetVarName().Apply(this);
         }
         OutAAssignExpressionAssignment(node);
     }

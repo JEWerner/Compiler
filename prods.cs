@@ -3598,7 +3598,7 @@ public sealed class AVarDeclareStatement : PStatement
 }
 public sealed class AAssignExpressionAssignment : PAssignment
 {
-    private TId _int_name_;
+    private TId _var_name_;
     private TEqual _equal_;
     private PExpressions _expressions_;
     private TSemicolon _semicolon_;
@@ -3608,13 +3608,13 @@ public sealed class AAssignExpressionAssignment : PAssignment
     }
 
     public AAssignExpressionAssignment (
-            TId _int_name_,
+            TId _var_name_,
             TEqual _equal_,
             PExpressions _expressions_,
             TSemicolon _semicolon_
     )
     {
-        SetIntName (_int_name_);
+        SetVarName (_var_name_);
         SetEqual (_equal_);
         SetExpressions (_expressions_);
         SetSemicolon (_semicolon_);
@@ -3623,7 +3623,7 @@ public sealed class AAssignExpressionAssignment : PAssignment
     public override Object Clone()
     {
         return new AAssignExpressionAssignment (
-            (TId)CloneNode (_int_name_),
+            (TId)CloneNode (_var_name_),
             (TEqual)CloneNode (_equal_),
             (PExpressions)CloneNode (_expressions_),
             (TSemicolon)CloneNode (_semicolon_)
@@ -3635,16 +3635,16 @@ public sealed class AAssignExpressionAssignment : PAssignment
         ((Analysis) sw).CaseAAssignExpressionAssignment(this);
     }
 
-    public TId GetIntName ()
+    public TId GetVarName ()
     {
-        return _int_name_;
+        return _var_name_;
     }
 
-    public void SetIntName (TId node)
+    public void SetVarName (TId node)
     {
-        if(_int_name_ != null)
+        if(_var_name_ != null)
         {
-            _int_name_.Parent(null);
+            _var_name_.Parent(null);
         }
 
         if(node != null)
@@ -3657,7 +3657,7 @@ public sealed class AAssignExpressionAssignment : PAssignment
             node.Parent(this);
         }
 
-        _int_name_ = node;
+        _var_name_ = node;
     }
     public TEqual GetEqual ()
     {
@@ -3735,7 +3735,7 @@ public sealed class AAssignExpressionAssignment : PAssignment
     public override string ToString()
     {
         return ""
-            + ToString (_int_name_)
+            + ToString (_var_name_)
             + ToString (_equal_)
             + ToString (_expressions_)
             + ToString (_semicolon_)
@@ -3744,9 +3744,9 @@ public sealed class AAssignExpressionAssignment : PAssignment
 
     internal override void RemoveChild(Node child)
     {
-        if ( _int_name_ == child )
+        if ( _var_name_ == child )
         {
-            _int_name_ = null;
+            _var_name_ = null;
             return;
         }
         if ( _equal_ == child )
@@ -3768,9 +3768,9 @@ public sealed class AAssignExpressionAssignment : PAssignment
 
     internal override void ReplaceChild(Node oldChild, Node newChild)
     {
-        if ( _int_name_ == oldChild )
+        if ( _var_name_ == oldChild )
         {
-            SetIntName ((TId) newChild);
+            SetVarName ((TId) newChild);
             return;
         }
         if ( _equal_ == oldChild )

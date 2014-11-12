@@ -142,8 +142,8 @@ Productions
 		{greater_than_equal_to}[side1]: add_sub grtreqto [side2]: add_sub|
 		{less_than_equal_to} [side1]: add_sub lesseqto [side2]: add_sub|
 		{equal_to} [side1]: add_sub eqto  [side2]:add_sub| 
-		{no_log_compare} add_sub|
-		{not}[no_not_expression]:expressions not [not_expression]:expressions;
+		{no_log_compare} add_sub;//|
+	//	{not}[no_not_expression]:expressions not [not_expression]:expressions;
 	
 	add_sub = 
 		{add} add_sub plus multi_div |
