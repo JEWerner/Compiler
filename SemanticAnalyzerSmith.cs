@@ -390,7 +390,7 @@ namespace parser
                     typename + " is not defined.");
                 nodehash.Add(node, null);
             }
-            else if ((lhs as VariableDefinition).vartype != rhs)
+            else if (lhs.GetType() != rhs.GetType())
             {
                 Console.WriteLine("[" + node.GetEqual().Line + "]: " +
                     "types don't match");
