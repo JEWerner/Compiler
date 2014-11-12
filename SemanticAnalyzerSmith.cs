@@ -428,88 +428,122 @@ namespace parser
 		
         public override void OutAAndExpressions(comp5210.node.AAndExpressions node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
+            Definition rhs, lhs;
+            nodehash.TryGetValue(node.GetExpressions(), out lhs);
+            nodehash.TryGetValue(node.GetLogicalCompare(), out rhs);
+            // make sure left hand side and right hand side match
+            if (lhs != booltype || rhs != booltype)
+            {
+                Console.WriteLine("[" + node.GetAnd().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.Add(node, booltype);
         }
         public override void OutAOrExpressions(comp5210.node.AOrExpressions node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
+            Definition rhs, lhs;
+            nodehash.TryGetValue(node.GetExpressions(), out lhs);
+            nodehash.TryGetValue(node.GetLogicalCompare(), out rhs);
+            // make sure left hand side and right hand side match
+            if (lhs != booltype || rhs != booltype)
+            {
+                Console.WriteLine("[" + node.GetOr().Line + "]: " +
+                    "types don't match");
+            }
+            nodehash.Add(node, booltype);
         }
         public override void OutANoLogOpExpressions(comp5210.node.ANoLogOpExpressions node)
         {
+            Definition exprdefn;
+            nodehash.TryGetValue(node.GetLogicalCompare(), out exprdefn);
+            nodehash.Add(node, exprdefn);
         }
 
         public override void OutAGreaterLogicalCompare(comp5210.node.AGreaterLogicalCompare node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
             Definition rhs, lhs;
-            Definition exprdefn;
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetGrtr().Line + "]: " +
                     "types don't match");
             }
-            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            nodehash.Add(node, booltype);
         }
         public override void OutALessThanLogicalCompare(comp5210.node.ALessThanLogicalCompare node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
             Definition rhs, lhs;
-            Definition exprdefn;
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetLessthan().Line + "]: " +
                     "types don't match");
             }
-            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            nodehash.Add(node, booltype);
         }
         public override void OutAGreaterThanEqualToLogicalCompare(comp5210.node.AGreaterThanEqualToLogicalCompare node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
             Definition rhs, lhs;
-            Definition exprdefn;
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetGrtreqto().Line + "]: " +
                     "types don't match");
             }
-            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            nodehash.Add(node, booltype);
         }
         public override void OutALessThanEqualToLogicalCompare(comp5210.node.ALessThanEqualToLogicalCompare node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
             Definition rhs, lhs;
-            Definition exprdefn;
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetLesseqto().Line + "]: " +
                     "types don't match");
             }
-            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            nodehash.Add(node, booltype);
         }
         public override void OutAEqualToLogicalCompare(comp5210.node.AEqualToLogicalCompare node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
             Definition rhs, lhs;
-            Definition exprdefn;
             nodehash.TryGetValue(node.GetSide1(), out lhs);
             nodehash.TryGetValue(node.GetSide2(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetEqto().Line + "]: " +
                     "types don't match");
             }
-            nodehash.TryGetValue(node.GetSide1(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            nodehash.Add(node, booltype);
         }
         public override void OutANoLogCompareLogicalCompare(comp5210.node.ANoLogCompareLogicalCompare node)
         {
@@ -525,7 +559,7 @@ namespace parser
             nodehash.TryGetValue(node.GetAddSub(), out lhs);
             nodehash.TryGetValue(node.GetMultiDiv(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetPlus().Line + "]: " +
                     "types don't match");
@@ -540,7 +574,7 @@ namespace parser
             nodehash.TryGetValue(node.GetAddSub(), out lhs);
             nodehash.TryGetValue(node.GetMultiDiv(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetSub().Line + "]: " +
                     "types don't match");
@@ -562,7 +596,7 @@ namespace parser
             nodehash.TryGetValue(node.GetMultiDiv(), out lhs);
             nodehash.TryGetValue(node.GetParenth(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetMulti().Line + "]: " +
                     "types don't match");
@@ -577,7 +611,7 @@ namespace parser
             nodehash.TryGetValue(node.GetMultiDiv(), out lhs);
             nodehash.TryGetValue(node.GetParenth(), out rhs);
             // make sure left hand side and right hand side match
-            if ((lhs as VariableDefinition).vartype != rhs)
+            if (lhs != rhs)
             {
                 Console.WriteLine("[" + node.GetDiv().Line + "]: " +
                     "types don't match");
