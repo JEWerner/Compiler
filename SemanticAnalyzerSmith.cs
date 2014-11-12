@@ -413,17 +413,65 @@ namespace parser
         {
         }
 		
-        public override void OutAElseElsepart(comp5210.node.AElseElsepart node)
-        {
-        }
         public override void OutAIfElseIf(comp5210.node.AIfElseIf node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
+            Definition exprtype;
+            nodehash.TryGetValue(node.GetExpressions(), out exprtype);
+            if (exprtype != booltype)
+            {
+                Console.WriteLine("[" + node.GetIflit().Line + "]: " +
+                    "types don't match");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutAIfIf(comp5210.node.AIfIf node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
+            Definition exprtype;
+            nodehash.TryGetValue(node.GetExpressions(), out exprtype);
+            if (exprtype != booltype)
+            {
+                Console.WriteLine("[" + node.GetIflit().Line + "]: " +
+                    "types don't match");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
+        }
+        public override void OutAElseElsepart(comp5210.node.AElseElsepart node)
+        {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+            nodehash.Add(node, booltype);
         }
         public override void OutAWhile(comp5210.node.AWhile node)
         {
+            BasicType booltype = new BasicType();
+            booltype.name = "boolean";
+
+            Definition exprtype;
+            nodehash.TryGetValue(node.GetExpressions(), out exprtype);
+            if (exprtype != booltype)
+            {
+                Console.WriteLine("[" + node.GetWhilelit().Line + "]: " +
+                    "types don't match");
+                nodehash.Add(node, null);
+            }
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
 		
         public override void OutAAndExpressions(comp5210.node.AAndExpressions node)
@@ -441,7 +489,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutAOrExpressions(comp5210.node.AOrExpressions node)
         {
@@ -458,7 +509,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutANoLogOpExpressions(comp5210.node.ANoLogOpExpressions node)
         {
@@ -482,7 +536,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutALessThanLogicalCompare(comp5210.node.ALessThanLogicalCompare node)
         {
@@ -499,7 +556,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutAGreaterThanEqualToLogicalCompare(comp5210.node.AGreaterThanEqualToLogicalCompare node)
         {
@@ -516,7 +576,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutALessThanEqualToLogicalCompare(comp5210.node.ALessThanEqualToLogicalCompare node)
         {
@@ -533,7 +596,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutAEqualToLogicalCompare(comp5210.node.AEqualToLogicalCompare node)
         {
@@ -550,7 +616,10 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.Add(node, booltype);
+            else
+            {
+                nodehash.Add(node, booltype);
+            }
         }
         public override void OutANoLogCompareLogicalCompare(comp5210.node.ANoLogCompareLogicalCompare node)
         {
@@ -572,8 +641,11 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            else
+            {
+                nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
+                nodehash.Add(node, exprdefn);
+            }
         }
         public override void OutASubtractAddSub(comp5210.node.ASubtractAddSub node)
         {
@@ -588,8 +660,11 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            else
+            {
+                nodehash.TryGetValue(node.GetMultiDiv(), out exprdefn);
+                nodehash.Add(node, exprdefn);
+            }
         }
         public override void OutANoMoreAddSubAddSub(comp5210.node.ANoMoreAddSubAddSub node)
         {
@@ -611,8 +686,11 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.TryGetValue(node.GetParenth(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            else
+            {
+                nodehash.TryGetValue(node.GetParenth(), out exprdefn);
+                nodehash.Add(node, exprdefn);
+            }
         }
         public override void OutADivideMultiDiv(comp5210.node.ADivideMultiDiv node)
         {
@@ -627,8 +705,11 @@ namespace parser
                     "types don't match");
                 nodehash.Add(node, null);
             }
-            nodehash.TryGetValue(node.GetParenth(), out exprdefn);
-            nodehash.Add(node, exprdefn);
+            else
+            {
+                nodehash.TryGetValue(node.GetParenth(), out exprdefn);
+                nodehash.Add(node, exprdefn);
+            }
         }
         public override void OutANoMoreDivMultiMultiDiv(comp5210.node.ANoMoreDivMultiMultiDiv node)
         {

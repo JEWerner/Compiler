@@ -109,7 +109,7 @@ Productions
 		
 	assignment = 
 		{assign_expression} [var_name]: id equal expressions semicolon|
-		{array_assign} [var_name]:id  [start_ob]:openbracket [internal_math]: expressions [start_cb]:closedbracket equal [external_math]:expressions semicolon;
+		{array_assign} [var_name]:id  openbracket [internal_math]: expressions closedbracket equal [external_math]:expressions semicolon;
 		
 	num_declare = 
 		{intdecl} [var_type]:id [var_name]:id equal intlit semicolon |
