@@ -444,38 +444,39 @@ namespace parser
         }
 
         public override void OutAIntdeclNumDeclare(comp5210.node.AIntdeclNumDeclare node)
-        {
+        {            
+            BasicType inttype = new BasicType();
+            inttype.name = "int";
+
             string varname = node.GetVarName().Text;
             string vartype = node.GetVarType().Text;
 
-            Definition typedefn;
-            // lookup the type
+            Definition typedefn, stuff;
+            // lookup the type see if it's in the table
             if (!stringhash.TryGetValue(vartype, out typedefn))
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     vartype + " is not defined.");
                 nodehash.Add(node, null);
             }
-            else if (stringhash.TryGetValue(varname, out typedefn))
+            // checks if it is an int
+            else if (typedefn != inttype)
+            {
+                Console.WriteLine("[" + node.GetVarType().Line + "]: " +
+                    varname + " is the wrong type, int.");
+                nodehash.Add(node, null);
+            }
+            // checks if varname is already in table
+            else if (stringhash.TryGetValue(varname, out stuff))
             {
                 Console.WriteLine("[" + node.GetVarType().Line + "]: " +
                     varname + " is already defined.");
                 nodehash.Add(node, null);
             }
-            // check to make sure what we got back is a type
-            else if (!(typedefn is TypeDefinition))
-            {
-                Console.WriteLine("[" + node.GetSemicolon().Line + "]: " +
-                    vartype + " is an invalid type.");
-                nodehash.Add(node, null);
-            }
             else
             {
-                
-                VariableDefinition vardefn = new VariableDefinition();
-                vardefn.name = varname;
-                vardefn.vartype = typedefn as TypeDefinition;
-                stringhash.Add(vardefn.name, vardefn);
+                stringhash.Add(varname, inttype);
+                nodehash.Add(node, inttype);
             }
         }
         public override void OutAFloatdeclNumDeclare(comp5210.node.AFloatdeclNumDeclare node)
